@@ -1,20 +1,25 @@
 <?php
-include('dados.php');
+require_once('dados.php');
 
-class Conexao{
-    function __construct($servername, $username, $password, $dbname){
-        $conn = new mysqli($servername, $username, $password,$dbname);
-        $this->checarConexao($conn);
+class Conexao {
+    private $conn;
+
+    function __construct($servername, $username, $password,$dbname){
+        $this->conn = new mysqli($servername, $username, $password,$dbname);
+        $this->checarConexao();
     }
 
-    public function checarConexao($conn){
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+    public function checarConexao(){
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
         }
         echo "Connected successfully";
     }
-}
 
+    public function getConnection() {
+        return $this->conn;
+    }
+}
 
 
 

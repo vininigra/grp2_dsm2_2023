@@ -1,5 +1,5 @@
 CREATE TABLE colaborador (
-    id int PRIMARY KEY,
+    id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(255),
     cpf varchar(14),
     email varchar(255),
@@ -7,7 +7,7 @@ CREATE TABLE colaborador (
 );
 
 CREATE TABLE participante (
-    id int PRIMARY KEY,
+    id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(255),
     email varchar(255),
     senha varchar(255),
@@ -15,7 +15,7 @@ CREATE TABLE participante (
 );
 
 CREATE TABLE evento (
-    id int PRIMARY KEY,
+    id int PRIMARY KEY AUTO_INCREMENT,
     data date,
     hora time,
     local varchar(255),
@@ -26,7 +26,7 @@ CREATE TABLE evento (
 );
 
 CREATE TABLE administrador (
-    id int PRIMARY KEY,
+    id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(255),
     senha varchar(255)
 );
