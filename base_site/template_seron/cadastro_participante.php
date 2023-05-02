@@ -17,10 +17,10 @@
        
        <label for="senha">Insira sua Senha</label><br><br>
        <input type="password" id="senha" name="senha"><br><br>
-       <label for="senha">Confirme a senha</label><br><br>
-       <input type="password" id="senha" name="senha"><br><br>
+       <label for="confirmasenha">Confirme a senha</label><br><br>
+       <input type="password" id="confirmasenha" name="confirmasenha"><br><br>
+       
        <input type = "submit" value="Enviar">
-
     </form>
 </body>
 </html>

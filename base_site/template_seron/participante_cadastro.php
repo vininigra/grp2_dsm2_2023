@@ -32,6 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
     
+    if($_POST['senha'] != $_POST['confirmasenha']){
+        echo "Senhas não conferem";
+        exit;
+    }
+        
+    
     // Se todos os campos foram preenchidos corretamente, cadastra o participante
     $participante = new Participante($servername, $username, $password, $dbname);
     $nome = $_POST['name'];
