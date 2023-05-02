@@ -23,14 +23,14 @@ class Participante extends Pessoa {
         $result = $this->connect->getConnection()->query($sql);
         // Verificando se o e-mail já está cadastrado
         // Se retornar alguma informacao pelo resultado, o email constará cadastrado
-        if ($result->num_rows > 0) {
+        if($result->num_rows > 0) {
             echo "Email já cadastrado";
         // Se retornar 0, a condição vai chamar uma query INSERT para colocar as informacoes do novo cadastro no banco de dados
-        } else {
+        }else{
             $insert = "INSERT INTO participante(nome, email, senha, idade) VALUES('$nome', '$email', '$senha', '$idade')";
-            if ($this->connect->getConnection()->query($insert) === TRUE) {
+            if($this->connect->getConnection()->query($insert) === TRUE){
                 echo "Dados inseridos com sucesso";
-            } else {
+            }else{
                 echo "Error: " . $insert . "<br>" . $this->connect->getConnection()->error;
             }
         }
