@@ -19,6 +19,9 @@ class Conexao {
     public function getConnection() {
         return $this->conn;
     }
+    public function closeConnection(){
+        $this->conn->close();
+    }
 }
 
 
