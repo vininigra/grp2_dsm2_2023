@@ -15,9 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $idade = $_POST['dt_nascimento'];
     $senha = $_POST['senha'];
-    $confirmasenha = $_POST['confirmaSenha'];
+    $confirmasenha =$_POST['confirmaSenha'];
     //Realizando as verificacoes das variaveis
-    $confirmasenha = $_POST['confirmaSenha'];
     $participante->verificaNome($nome);
     $participante->verificaEmail($email);
     $participante->verificaData($idade);

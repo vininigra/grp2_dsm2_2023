@@ -17,6 +17,9 @@ class Participante extends Pessoa {
         $nome = mysqli_real_escape_string($this->connect->getConnection(), $nome);
         $idade = mysqli_real_escape_string($this->connect->getConnection(), $idade);
 
+
+    }
+    private function insercao($nome, $idade, $email, $senha){
         $sql = "SELECT email FROM participante WHERE email = '$email'";
         // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
         $result = $this->connect->getConnection()->query($sql);
@@ -24,7 +27,7 @@ class Participante extends Pessoa {
         // Se retornar alguma informacao pelo resultado, o email constará cadastrado
         if($result->num_rows > 0) {
             echo "Email já cadastrado";
-
+        }else{
             $insert = "INSERT INTO participante(nome, email, senha, idade) VALUES('$nome', '$email', '$senha', '$idade')";
             if($this->connect->getConnection()->query($insert) === TRUE){
                 echo "Dados inseridos com sucesso";
@@ -33,6 +36,7 @@ class Participante extends Pessoa {
             }
             
         }
+
     }
     public function cadastrar($nome, $idade, $email, $senha) {
         // Chamada do metodo para a sanitizacão

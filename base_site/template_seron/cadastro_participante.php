@@ -46,8 +46,8 @@
             
                     <label for="senha">Insira sua Senha</label><br><br>
                     <input type="password" id="senha" name="senha"><br><br>
-                    <label for="confirmasenha">Confirme a senha</label><br><br>
-                    <input type="password" id="confirmasenha" name="confirmasenha"><br><br>
+                    <label for="confirmaSenha">Confirme a senha</label><br><br>
+                    <input type="password" id="confirmaSenha" name="confirmaSenha"><br><br>
                     <div class= "blue-button">
                         <input type = "submit" value="Enviar">
                     </div>
