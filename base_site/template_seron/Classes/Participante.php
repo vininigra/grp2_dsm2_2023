@@ -41,9 +41,12 @@ class Participante extends Pessoa {
     public function cadastrar($nome, $idade, $email, $senha) {
         // Chamada do metodo para a sanitizacão
         $this->sanitizar($nome, $idade, $email, $senha);
+
+        //Criptografando a senha
+        $hash = $this->criptografarSenha($senha);
         
         //Chamada da insercao de dados
-        $this->insercao($nome, $idade, $email, $senha);
+        $this->insercao($nome, $idade, $email, $hash);
         
        
     }
@@ -52,7 +55,7 @@ class Participante extends Pessoa {
         // TODO: Implementar a função login
     }
 
-
+    // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
         $this->connect->closeConnection();
     }

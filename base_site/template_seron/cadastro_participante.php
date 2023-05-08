@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if ($_POST['senha'] !== $_POST['confirmaSenha']) {
+    $_SESSION['error'] = 'As senhas não conferem';
+    header('Location: index.php');
+    exit;
+  }
+}
+
+if (isset($_SESSION['error'])) {
+  $error = $_SESSION['error'];
+  unset($_SESSION['error']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,7 +52,10 @@
     </section>
     <div class= "container">
         <div class= "row"></div>
-            <div class= "col-md-12"></div>
+            <div class= "col-md-12">
+                <?php if (isset($error)) { ?>
+                    <div class="error"><?php echo $error; ?></div>
+                <?php } ?>
                 <form action = "participante_cadastro.php" method = "post" >
                     <label for="name">Nome Completo</label>
                     <input type = "text" id = "name" name = "name"><br><br>

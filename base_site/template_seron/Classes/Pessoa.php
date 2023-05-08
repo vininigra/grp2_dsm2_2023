@@ -3,7 +3,7 @@
 abstract class Pessoa{
     private $nome, $email,$senha;
      // Método para criptografar a senha
-     private function criptografarSenha($senha) {
+     protected function criptografarSenha($senha) {
         $hash = password_hash($senha, PASSWORD_DEFAULT);
         return $hash;
     }
@@ -19,7 +19,7 @@ abstract class Pessoa{
     // Método que verifica se os campos senha e confirma senha estão correspondentes
     public function comparaSenha($senha,$confirmaSenha){
         if($senha != $confirmaSenha) {
-            echo 'As senhas não coincidem!';
+            echo "<p style='color: red'>As senhas não conferem</p>";
             exit;
            }
         }
