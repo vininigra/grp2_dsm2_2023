@@ -9,12 +9,15 @@ class Colaborador extends Pessoa{
         $this->connect = $connect;
         $connect = new Conexao($servername, $username, $password, $dbname);
     }
+    // Sanitizacao dos dados para dificultar SQL Injection
+    private function sanitizacao(){
+        $email = mysqli_real_escape_string($this->connect->getConnection(), $email);
+        $senha = mysqli_real_escape_string($this->connect->getConnection(), $senha);
+        $nome = mysqli_real_escape_string($this->connect->getConnection(), $nome);
+        $cpf = mysqli_real_escape_string($this->connect->getConnection(), $cpf);
+    }
     public function cadastrar(){
-         // Sanitizacao dos dados para dificultar SQL Injection
-         $email = mysqli_real_escape_string($this->connect->getConnection(), $email);
-         $senha = mysqli_real_escape_string($this->connect->getConnection(), $senha);
-         $nome = mysqli_real_escape_string($this->connect->getConnection(), $nome);
-         $cpf = mysqli_real_escape_string($this->connect->getConnection(), $cpf);
+       
          // Selecao dos dados para checagem se o email que foi inserido já consta no banco de dados
          $sql = "SELECT email FROM colaborador WHERE email = '$email'";
          // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
