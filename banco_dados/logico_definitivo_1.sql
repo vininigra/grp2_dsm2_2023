@@ -5,7 +5,8 @@ CREATE TABLE colaborador (
     nome varchar(255),
     cpf varchar(14),
     email varchar(255),
-    senha varchar(255)
+    senha varchar(255),
+    aprovacao varchar(255)
 );
 
 CREATE TABLE participante (
