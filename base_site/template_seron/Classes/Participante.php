@@ -19,16 +19,22 @@ class Participante extends Pessoa {
 
 
     }
-    private function insercao($nome, $idade, $email, $senha){
-        $sql = "SELECT email FROM participante WHERE email = '$email'";
-        // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
+    protected function selectEmail($email){
+        // Selecao dos dados para checagem se o email que foi inserido já consta no banco de dados
+        $sql = "SELECT email FROM colaborador WHERE email = '$email'";
+         // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
         $result = $this->connect->getConnection()->query($sql);
+        return $result;
+        
+    }
+    private function insercao($nome, $idade, $email, $senha){
+        $result = $this->selectEmail($email);
         // Verificando se o e-mail já está cadastrado
         // Se retornar alguma informacao pelo resultado, o email constará cadastrado
         if($result->num_rows > 0) {
             echo "Email já cadastrado";
         }else{
-            $insert = "INSERT INTO participante(nome, email, senha, idade) VALUES('$nome', '$email', '$senha', '$idade')";
+            $insert = "INSERT INTO participante(nome, email, senha, nasc) VALUES('$nome', '$email', '$senha', '$idade')";
             if($this->connect->getConnection()->query($insert) === TRUE){
                 echo "Dados inseridos com sucesso";
             }else{
@@ -50,10 +56,7 @@ class Participante extends Pessoa {
         
        
     }
-
-    public function login($email, $senha) {
-        // TODO: Implementar a função login
-    }
+    
 
     // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){

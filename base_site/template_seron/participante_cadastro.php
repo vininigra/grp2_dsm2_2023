@@ -27,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Se todos os campos foram preenchidos corretamente, cadastra o participante
     $participante->cadastrar($nome, $idade, $email, $senha);
 
+    // Destroi o objeto participante e fecha a conexao com o banco de dados
     unset($participante);
 }
 

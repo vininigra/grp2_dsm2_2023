@@ -1,3 +1,5 @@
+CREATE DATABASE seron;
+
 CREATE TABLE colaborador (
     id int PRIMARY KEY AUTO_INCREMENT,
     nome varchar(255),
@@ -11,7 +13,7 @@ CREATE TABLE participante (
     nome varchar(255),
     email varchar(255),
     senha varchar(255),
-    idade int
+    nasc date
 );
 
 CREATE TABLE evento (
@@ -32,6 +34,7 @@ CREATE TABLE administrador (
 );
 
 CREATE TABLE valida (
+    
     fk_colaborador_id int,
     fk_administrador_id int,
     FOREIGN KEY (fk_colaborador_id) REFERENCES colaborador(id) ON DELETE RESTRICT,
