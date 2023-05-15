@@ -31,7 +31,7 @@ class Colaborador extends Pessoa{
             echo "Email já cadastrado";
         // Se retornar 0, a condição vai chamar uma query INSERT para colocar as informacoes do novo cadastro no banco de dados
         }else{
-            $insert = "INSERT INTO colaborador(nome, cpf, email, senha) VALUES('$nome', $cpf, '$email', '$senha')";
+            $insert = "INSERT INTO colaborador(nome, cpf, email, senha, aprovacao) VALUES('$nome', $cpf, '$email', '$senha','Pendente')";
             if($this->connect->getConnection()->query($insert) === TRUE){
                 echo "Dados inseridos com sucesso";
             }else{
@@ -49,6 +49,46 @@ class Colaborador extends Pessoa{
         //Chamada da insercao de dados
         $this->insercao($nome, $cpf, $email, $hash);
 
+    }
+    private function sanitizarLogin($email, $senha){
+        $email = mysqli_real_escape_string($this->connect->getConnection(), $email);
+        $senha = mysqli_real_escape_string($this->connect->getConnection(), $senha);
+        
+        return array($email, $senha);
+    }
+    private function selectLogin($email){
+        
+        
+        // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
+        $sql = "SELECT * FROM colaborador WHERE email='$email'";
+        $result = $this->connect->getConnection()->query($sql);
+        return $result;
+    }
+    public function login($email, $senha) {
+        // Sanitizando os dados inserios
+        list($email, $senha) = $this->sanitizarLogin($email, $senha);
+        
+        //Select no banco de dados para procurar a coluna
+        $result = $this->selectLogin($email);
+    
+        // Verificar se o registro foi encontrado
+        if ($result->num_rows > 0) {
+            
+            // Inicializar a sessão e armazenar o id do usuário na variável $_SESSION
+            session_start();
+            $row = $result->fetch_assoc();
+            $hash = $row['senha'];
+            if($this->comparaSenhaBanco($senha, $hash) === TRUE){
+                $_SESSION['id'] = $row['id'];
+                echo "Login realizado com sucesso!";
+                header('location:index.html');
+            }else{
+                return "Email ou senha incorretos";
+            }
+            
+        } else {
+            return "Email ou senha incorretos";
+        }
     }
      // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
