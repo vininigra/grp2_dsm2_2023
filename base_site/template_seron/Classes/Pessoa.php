@@ -51,34 +51,7 @@ abstract class Pessoa{
             exit;
     } 
     }
-    private function sanitizarLogin($email, $senha){
-        $email = mysqli_real_escape_string($this->connect->getConnection(), $email);
-        $senha = mysqli_real_escape_string($this->connect->getConnection(), $senha);
-        $senha = $this->criptografarSenha($senha);
-    }
-    private function selectLogin($email, $senha){
-    // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
-    $sql = "SELECT * FROM participante WHERE email='$email' AND senha='$senha'";
-    $result = $this->connect->getConnection()->query($sql);
-    return $result;
-    }
-    public function login($email, $senha) {
-        // Sanitizando os dados inserios
-        $this->sanitizarLogin($email, $senha);
-        //Select no banco de dados para procurar a coluna
-        $result = $this->selectLogin($email, $senha);
-
-    // Verificar se o registro foi encontrado
-    if ($result->num_rows > 0) {
-        // Inicializar a sessão e armazenar o id do usuário na variável $_SESSION
-        session_start();
-        $row = $result->fetch_assoc();
-        $_SESSION['id'] = $row['id'];
-        echo "Login realizado com sucesso!";
-    } else {
-        echo "Email ou senha incorretos";
-    }
-    }
+    
 
 }
 

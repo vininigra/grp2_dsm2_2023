@@ -21,7 +21,7 @@ class Participante extends Pessoa {
     }
     protected function selectEmail($email){
         // Selecao dos dados para checagem se o email que foi inserido já consta no banco de dados
-        $sql = "SELECT email FROM colaborador WHERE email = '$email'";
+        $sql = "SELECT email FROM participante WHERE email = '$email'";
          // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
         $result = $this->connect->getConnection()->query($sql);
         return $result;
@@ -56,12 +56,45 @@ class Participante extends Pessoa {
         
        
     }
+    private function sanitizarLogin($email, $senha){
+        $email = mysqli_real_escape_string($this->connect->getConnection(), $email);
+        $senha = mysqli_real_escape_string($this->connect->getConnection(), $senha);
+        
+        return array($email, $senha);
+    }
+    private function selectLogin($email, $senha){
+        // Certifique-se de que está usando o mesmo hash que usou para criar a senha
+        $senha = $this->criptografarSenha($senha);
+        // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
+        $sql = "SELECT * FROM participante WHERE email='$email' AND senha='$senha'";
+        $result = $this->connect->getConnection()->query($sql);
+        return $result;
+    }
+    public function login($email, $senha) {
+        // Sanitizando os dados inserios
+        list($email, $senha) = $this->sanitizarLogin($email, $senha);
+        
+        //Select no banco de dados para procurar a coluna
+        $result = $this->selectLogin($email, $senha);
     
+        // Verificar se o registro foi encontrado
+        if ($result->num_rows > 0) {
+            // Inicializar a sessão e armazenar o id do usuário na variável $_SESSION
+            session_start();
+            $row = $result->fetch_assoc();
+            $_SESSION['id'] = $row['id'];
+            echo "Login realizado com sucesso!";
+            header('location:index.html');
+        } else {
+            return "Email ou senha incorretos";
+        }
+    }
 
     // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
         $this->connect->closeConnection();
     }
+    
 }
 
 
