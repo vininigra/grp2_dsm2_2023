@@ -23,6 +23,11 @@ abstract class Pessoa{
             exit;
            }
         }
+    protected function comparaSenhaBanco($senha, $hash){
+        if(password_verify($senha,$hash)){
+            return true;
+        }
+    }
     // Verifica se o campo nome foi preenchido
     public function verificaNome($nome){
         if (empty($nome)) {

@@ -62,11 +62,11 @@ class Participante extends Pessoa {
         
         return array($email, $senha);
     }
-    private function selectLogin($email, $senha){
-        // Certifique-se de que está usando o mesmo hash que usou para criar a senha
-        $senha = $this->criptografarSenha($senha);
+    private function selectLogin($email){
+        
+        
         // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
-        $sql = "SELECT * FROM participante WHERE email='$email' AND senha='$senha'";
+        $sql = "SELECT * FROM participante WHERE email='$email'";
         $result = $this->connect->getConnection()->query($sql);
         return $result;
     }
@@ -75,16 +75,23 @@ class Participante extends Pessoa {
         list($email, $senha) = $this->sanitizarLogin($email, $senha);
         
         //Select no banco de dados para procurar a coluna
-        $result = $this->selectLogin($email, $senha);
+        $result = $this->selectLogin($email);
     
         // Verificar se o registro foi encontrado
         if ($result->num_rows > 0) {
+            
             // Inicializar a sessão e armazenar o id do usuário na variável $_SESSION
             session_start();
             $row = $result->fetch_assoc();
-            $_SESSION['id'] = $row['id'];
-            echo "Login realizado com sucesso!";
-            header('location:index.html');
+            $hash = $row['senha'];
+            if($this->comparaSenhaBanco($senha, $hash) === TRUE){
+                $_SESSION['id'] = $row['id'];
+                echo "Login realizado com sucesso!";
+                header('location:index.html');
+            }else{
+                return "Email ou senha incorretos";
+            }
+            
         } else {
             return "Email ou senha incorretos";
         }
