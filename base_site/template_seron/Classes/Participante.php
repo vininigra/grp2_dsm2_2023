@@ -81,13 +81,15 @@ class Participante extends Pessoa {
         if ($result->num_rows > 0) {
             
             // Inicializar a sessão e armazenar o id do usuário na variável $_SESSION
-            session_start();
+            
             $row = $result->fetch_assoc();
             $hash = $row['senha'];
             if($this->comparaSenhaBanco($senha, $hash) === TRUE){
+                session_start();
                 $_SESSION['id'] = $row['id'];
+
                 echo "Login realizado com sucesso!";
-                header('location:index.html');
+                header('location:index.php');
             }else{
                 return "Email ou senha incorretos";
             }
