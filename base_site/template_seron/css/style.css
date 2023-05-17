@@ -323,7 +323,7 @@ section.banner {
 
 .banner {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -780,7 +780,7 @@ section.our-services .service-item h4 {
 }
 
 section#video-container {
-  background-image: url(../img/contact-image-1-1920x700.jpg);
+  background-image: url(../img/cover_notion_2.png);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
