@@ -92,7 +92,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <img src="img/about_us_2.png" class="img-fluid" alt="">
+                        <img src="img/seron_banner.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
