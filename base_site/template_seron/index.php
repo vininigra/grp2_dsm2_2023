@@ -49,8 +49,14 @@ if (isset($_SESSION['id'])) {
                                 <li><a href="about-us.php">Sobre Nós</a></li>
 
                                 <li><a href="team.php">Autores</a></li>
-
-                                <li><a href="cadastro.php"><?php echo $status; ?></a></li>
+                                
+                                <li>
+                                    <?php if($status = 'Logado'){
+                                       echo '<a> Logado como: $_SESSION["name"]</a>';
+                                    }else{
+                                        echo '<a href="cadastro.php"> echo $status</a>';
+                                    } ?>
+                                </li>
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>

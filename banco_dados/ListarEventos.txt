@@ -1,0 +1,17 @@
+USE SERON;
+INSERT INTO evento (data,hora,local,tipo_esporte,faixa_etaria) VALUES("2023-05-15","21:00:00",'CENTRO ESPORTES RIO CLARO','FUTEBOL',35);
+
+
+
+// Store PROCEDURE DO PI (seron)
+// Listar Eventos
+DELIMITER $
+CREATE OR REPLACE PROCEDURE SP_LISTAREVENTOS()
+BEGIN
+	SELECT e.id,e.`data`,e.hora,e.`local`,e.tipo_esporte AS Esporte,e.faixa_etaria
+	FROM evento e;
+	
+END $
+DELIMITER ;
+
+CALL SP_LISTAREVENTOS();
