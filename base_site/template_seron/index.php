@@ -7,8 +7,8 @@ if (isset($_SESSION['id'])) {
     $status = "Cadastre-se";
 }
 ?>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE php>
+<php>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -37,20 +37,20 @@ if (isset($_SESSION['id'])) {
                 <div class="row">
                     <div class="col-md-12">
                         <button id="primary-nav-button" type="button">Menu</button>
-                        <a href="index.html"><div class="logo">
+                        <a href="index.php"><div class="logo">
                             <img src="img/logo2.png" alt="Venue Logo" width="220" height="100">
                         </div></a>
                         <nav id="primary-nav" class="dropdown cf">
                             <ul class="dropdown menu">
-                                <li class='active'><a href="index.html">Página Inicial</a></li>
+                                <li class='active'><a href="index.php">Página Inicial</a></li>
 
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="blog.php">Eventos</a></li>
 
-                                <li><a href="about-us.html">Sobre Nós</a></li>
+                                <li><a href="about-us.php">Sobre Nós</a></li>
 
-                                <li><a href="team.html">Autores</a></li>
+                                <li><a href="team.php">Autores</a></li>
 
-                                <li><a href="cadastro.html"><?php echo $status; ?></a></li>
+                                <li><a href="cadastro.php"><?php echo $status; ?></a></li>
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
@@ -59,7 +59,7 @@ if (isset($_SESSION['id'])) {
         </header>
     </div>
       
-    <section class="banner" id="top" style="background-image: url(img/homepage-banner-image-1920x700.jpg);">
+    <section class="banner" id="top" style="background-image: url(img/esportes.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -67,7 +67,7 @@ if (isset($_SESSION['id'])) {
                         <div class="line-dec"></div>
                         <h2>Seja bem-vindo ao Seron.</h2>
                         <div class="blue-button">
-                            <a href="cadastro.html">Cadastre-se</a>
+                            <a href="cadastro.php">Cadastre-se</a>
                         </div>
                     </div>
                 </div>
@@ -83,16 +83,16 @@ if (isset($_SESSION['id'])) {
                         <div class="left-content">
                             <br>
                             <h4>Sobre Nós</h4>
-                            <p>Aenean hendrerit metus leo, quis viverra purus condimentum nec. Pellentesque a sem semper, lobortis mauris non, varius urna. Quisque sodales purus eu tellus fringilla.<br><br>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst. Vel sequi odit similique repudiandae ipsum iste, quidem tenetur id impedit, eaque et, aliquam quod.</p>
+                                <p>O Seron é uma plataforma voltada ao desenvolvimento esportivo de jovens e adultos de Araras e região.</p>
                             <div class="blue-button">
-                                <a href="about-us.html">Saiba Mais</a>
+                                <a href="about-us.php">Saiba Mais</a>
                             </div>
 
                             <br>
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <img src="img/about-1-720x480.jpg" class="img-fluid" alt="">
+                        <img src="img/seron_banner.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -108,6 +108,7 @@ if (isset($_SESSION['id'])) {
                         </div>
                     </div> 
                 </div> 
+
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="featured-item">
@@ -129,7 +130,7 @@ if (isset($_SESSION['id'])) {
                                 <p>Se inscreva na oficina de basquete ministrada pelo instrutor Marcos Filho.</p>
 
                                 <div class="text-button">
-                                    <a href="blog-details.html">Inscrever-se</a>
+                                    <a href="cadastro.php">Inscrever-se</a>
                                 </div>
                             </div>
                         </div>
@@ -152,10 +153,10 @@ if (isset($_SESSION['id'])) {
                             <div class="down-content">
                                 <h4>Oficina de Vôlei</h4>
 
-                                <p>Se inscreva na oficina de basquete ministrada pelo instrutor José Silva.</p>
+                                <p>Se inscreva na oficina de volei ministrada pelo instrutor José Silva.</p>
 
                                 <div class="text-button">
-                                    <a href="blog-details.html">Inscrever-se</a>
+                                    <a href="cadastro.php">Inscrever-se</a>
                                 </div>
                             </div>
                         </div>
@@ -178,18 +179,17 @@ if (isset($_SESSION['id'])) {
                             <div class="down-content">
                                 <h4>Oficina de Futebol</h4>
 
-                                <p>Se inscreva na oficina de basquete ministrada pela instrutora Beatriz Macedo.</p>
+                                <p>Se inscreva na oficina de futebol ministrada pela instrutora Beatriz Macedo.</p>
 
                                 <div class="text-button">
-                                    <a href="blog-details.html">Inscrever-se</a>
+                                    <a href="cadastro.php">Inscrever-se</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="row">
+                <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="featured-item">
                             <div class="thumb">
@@ -210,12 +210,65 @@ if (isset($_SESSION['id'])) {
                                 <p>Se inscreva na oficina de basquete ministrada pelo instrutor Marcos Filho.</p>
 
                                 <div class="text-button">
-                                    <a href="blog-details.html">Inscrever-se</a>
+                                    <a href="cadastro.php">Inscrever-se</a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="featured-item">
+                            <div class="thumb">
+                                <div class="thumb-img">
+                                    <img src="img/volei.jpg" alt="">
+                                </div>
+
+                                <div class="overlay-content">
+                                 <strong title="Author"><i class="fa fa-user"></i> FHO</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <strong title="Posted on"><i class="fa fa-calendar"></i> 12/06/2020 10:30</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <!-- <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> -->
+                                </div>
+                            </div>
+
+                            <div class="down-content">
+                                <h4>Oficina de Vôlei</h4>
+
+                                <p>Se inscreva na oficina de volei ministrada pelo instrutor José Silva.</p>
+
+                                <div class="text-button">
+                                    <a href="cadastro.php">Inscrever-se</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        <div class="featured-item">
+                            <div class="thumb">
+                                <div class="thumb-img">
+                                    <img src="img/futebol.jpg" alt="">
+                                </div>
+
+                                <div class="overlay-content">
+                                 <strong title="Author"><i class="fa fa-user"></i> Ginasio Nelson Ruegger</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <strong title="Posted on"><i class="fa fa-calendar"></i> 12/06/2020 10:30</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                 <!-- <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> -->
+                                </div>
+                            </div>
+
+                            <div class="down-content">
+                                <h4>Oficina de Futebol</h4>
+
+                                <p>Se inscreva na oficina de futebol ministrada pela instrutora Beatriz Macedo.</p>
+
+                                <div class="text-button">
+                                    <a href="cadastro.php">Inscrever-se</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section id="video-container">
@@ -223,13 +276,12 @@ if (isset($_SESSION['id'])) {
             <div class="video-content">
                 <div class="inner">
                       <div class="section-heading">
-                          <span>Contact Us</span>
-                          <h2>Vivamus nec vehicula felis</h2>
-                      </div>
-                      <!-- Modal button -->
+                          <span>Nos contate</span>
+                          <h2>Venha conhecer a experiência de ser Seron</h2>
+                        </div>
 
                       <div class="blue-button">
-                        <a href="contact.html">Talk to us</a>
+                        <a href="contact.php">Fale Conosco</a>
                       </div>
                 </div>
             </div>
@@ -244,34 +296,27 @@ if (isset($_SESSION['id'])) {
                         <div class="logo">
                             <img src="img/logo2.png" alt="Venue Logo" width="200" height="100">
                         </div>
-                        <p>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellustea dictumst.</p>
-                        <ul class="social-icons">
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+                        <p>Nosso objetivo é incentivar o antii-sedentarismo, visando a saúde e bem estar da população mais jovem.</p>
+                </div>
                 </div>
                 <div class="col-md-4">
                     <div class="useful-links">
                         <div class="footer-heading">
-                            <h4>Useful Links</h4>
+                            <h4>Links rápidos</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul>
-                                    <li><a href="inde.html"><i class="fa fa-stop"></i>Home</a></li>
-                                    <li><a href="about.html"><i class="fa fa-stop"></i>About</a></li>
-                                    <li><a href="contact.html"><i class="fa fa-stop"></i>Contact Us</a></li>
+                                    <li><a href="index.php"><i class="fa fa-stop"></i>Página Inicial</a></li>
+                                    <li><a href="about.php"><i class="fa fa-stop"></i>Sobre Nós</a></li>
+                                    <li><a href="contact.php"><i class="fa fa-stop"></i>Fale Conosco</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul>
-                                    <li><a href="team.html"><i class="fa fa-stop"></i>Authors</a></li>
-                                    <li><a href="blog.html"><i class="fa fa-stop"></i>Blog</a></li>
-                                    <li><a href="terms.html"><i class="fa fa-stop"></i>Terms</a></li>
+                                    <li><a href="team.php"><i class="fa fa-stop"></i>Autores</a></li>
+                                    <li><a href="blog.php"><i class="fa fa-stop"></i>Eventos</a></li>
+                                    <li><a href="terms.php"><i class="fa fa-stop"></i>Termos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -280,12 +325,12 @@ if (isset($_SESSION['id'])) {
                 <div class="col-md-3">
                     <div class="contact-info">
                         <div class="footer-heading">
-                            <h4>Contact Information</h4>
+                            <h4>Informações de contato</h4>
                         </div>
-                        <p><i class="fa fa-map-marker"></i> 212 Barrington Court New York, ABC</p>
+                        <p><i class="fa fa-map-marker"></i> Fatec Araras, SP</p>
                         <ul>
-                            <li><span>Phone:</span><a href="#">+1 333 4040 5566</a></li>
-                            <li><span>Email:</span><a href="#">contact@company.com</a></li>
+                            <li><span>Phone:</span><a href="#">+55 19 99999-9999</a></li>
+                            <li><span>Email:</span><a href="#">sac@seron.com.br</a></li>
                         </ul>
                     </div>
                 </div>
@@ -294,7 +339,7 @@ if (isset($_SESSION['id'])) {
     </footer>
 
     <div class="sub-footer">
-        <p>Copyright © 2020 Company Name - Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></p>
+        <p>Copyright © 2023 SERON - Conheça mais sobre: <a href="https://periodic-word-7f5.notion.site/SERON-4ab5a4c87629464c9faf2b9417301042">Seron.com</a></p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
@@ -306,4 +351,4 @@ if (isset($_SESSION['id'])) {
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 </body>
-</html>
+</php>
