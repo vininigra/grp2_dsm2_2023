@@ -87,6 +87,7 @@ class Participante extends Pessoa {
             if($this->comparaSenhaBanco($senha, $hash) === TRUE){
                 session_start();
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['user'] = $row['nome'];
 
                 echo "Login realizado com sucesso!";
                 header('location:index.php');

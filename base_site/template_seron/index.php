@@ -1,7 +1,7 @@
 <?php
 session_start();
 // Verifica se a sessão está iniciada
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['id'])){
     $status = "Logado";
 } else {
     $status = "Cadastre-se";
@@ -52,11 +52,17 @@ if (isset($_SESSION['id'])) {
                                 
                                 <li>
                                     <?php if($status = 'Logado'){
-                                       echo '<a> Logado como: $_SESSION["name"]</a>';
+                                        
+                                       echo '<a> Logado como:' . $_SESSION['user'] . ' </a>';
                                     }else{
-                                        echo '<a href="cadastro.php"> echo $status</a>';
+                                        echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>
                                 </li>
+                                <?php
+                                    if($status = 'Logado') 
+                                        echo '<li> <a href="loginP.php"> Sair </a> </li>';                                
+                                ?>
+
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
