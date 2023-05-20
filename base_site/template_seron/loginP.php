@@ -33,5 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             echo "<p style='color:red'>$resultado</p><br>";
         }
     }
+
+    unset($pessoa);
 }
 ?>

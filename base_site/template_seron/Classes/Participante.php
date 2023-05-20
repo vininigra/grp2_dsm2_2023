@@ -88,11 +88,13 @@ class Participante extends Pessoa {
                 session_start();
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user'] = $row['nome'];
-
+                $_SESSION['loggedin'] = TRUE;
                 echo "Login realizado com sucesso!";
                 header('location:index.php');
             }else{
                 return "Email ou senha incorretos";
+                session_start();
+                $_SESSION['loggedin'] = FALSE;
             }
             
         } else {

@@ -1,14 +1,14 @@
 <?php
 session_start();
 // Verifica se a sessão está iniciada
-if (isset($_SESSION['id'])){
+if (isset($_SESSION['loggedin'])){
     $status = "Logado";
 } else {
     $status = "Cadastre-se";
 }
 ?>
-<!DOCTYPE php>
-<php>
+<!DOCTYPE html>
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -51,7 +51,7 @@ if (isset($_SESSION['id'])){
                                 <li><a href="team.php">Autores</a></li>
                                 
                                 <li>
-                                    <?php if($status = 'Logado'){
+                                    <?php if($status == 'Logado'){
                                         
                                        echo '<a> Logado como:' . $_SESSION['user'] . ' </a>';
                                     }else{
@@ -59,7 +59,7 @@ if (isset($_SESSION['id'])){
                                     } ?>
                                 </li>
                                 <?php
-                                    if($status = 'Logado') 
+                                    if($status == 'Logado') 
                                         echo '<li> <a href="loginP.php"> Sair </a> </li>';                                
                                 ?>
 
@@ -363,4 +363,4 @@ if (isset($_SESSION['id'])){
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 </body>
-</php>
+</html>
