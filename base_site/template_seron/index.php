@@ -104,7 +104,7 @@ if (isset($_SESSION['loggedin'])){
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <img src="img/seron_banner.png" class="img-fluid" alt="">
+                        <img src="img/about_us.png" class="img-fluid" alt="">
                     </div>
                 </div>
             </div>
@@ -206,7 +206,7 @@ if (isset($_SESSION['loggedin'])){
                         <div class="featured-item">
                             <div class="thumb">
                                 <div class="thumb-img">
-                                    <img src="img/basquete.jpg" alt="">
+                                    <img src="img/golf.png" alt="">
                                 </div>
 
                                 <div class="overlay-content">
@@ -217,9 +217,9 @@ if (isset($_SESSION['loggedin'])){
                             </div>
 
                             <div class="down-content">
-                                <h4>Oficina de Basquete</h4>
+                                <h4>Oficina de Golf</h4>
 
-                                <p>Se inscreva na oficina de basquete ministrada pelo instrutor Marcos Filho.</p>
+                                <p>Se inscreva na oficina de golf ministrada pelo instrutor Jean Paul.</p>
 
                                 <div class="text-button">
                                     <a href="cadastro.php">Inscrever-se</a>
@@ -232,7 +232,7 @@ if (isset($_SESSION['loggedin'])){
                         <div class="featured-item">
                             <div class="thumb">
                                 <div class="thumb-img">
-                                    <img src="img/volei.jpg" alt="">
+                                    <img src="img/handbol.png" alt="">
                                 </div>
 
                                 <div class="overlay-content">
@@ -243,9 +243,9 @@ if (isset($_SESSION['loggedin'])){
                             </div>
 
                             <div class="down-content">
-                                <h4>Oficina de Vôlei</h4>
+                                <h4>Oficina de Handbol</h4>
 
-                                <p>Se inscreva na oficina de volei ministrada pelo instrutor José Silva.</p>
+                                <p>Se inscreva na oficina de handbol ministrada pela instrutora Jenfier Reis.</p>
 
                                 <div class="text-button">
                                     <a href="cadastro.php">Inscrever-se</a>
@@ -258,7 +258,7 @@ if (isset($_SESSION['loggedin'])){
                         <div class="featured-item">
                             <div class="thumb">
                                 <div class="thumb-img">
-                                    <img src="img/futebol.jpg" alt="">
+                                    <img src="img/natacao.png" alt="">
                                 </div>
 
                                 <div class="overlay-content">
@@ -269,7 +269,7 @@ if (isset($_SESSION['loggedin'])){
                             </div>
 
                             <div class="down-content">
-                                <h4>Oficina de Futebol</h4>
+                                <h4>Oficina de Natacao</h4>
 
                                 <p>Se inscreva na oficina de futebol ministrada pela instrutora Beatriz Macedo.</p>
 
