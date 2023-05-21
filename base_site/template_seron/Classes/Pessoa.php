@@ -49,12 +49,20 @@ abstract class Pessoa{
             exit;
     }
     }
-    // Verifica se o campo senha foi preenchido
+    
+    
     public function validaSenha($senha){   
         if (empty($_POST["senha"])) {
             echo "O campo senha é obrigatório";
             exit;
     } 
+    }
+    public function logout(){
+        //if(isset($_SESSION['loggedin'])){
+            //$_SESSION['loggedin'] == FALSE;
+            session_destroy();
+            
+        //}
     }
     
 

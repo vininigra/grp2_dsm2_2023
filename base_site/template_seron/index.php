@@ -60,7 +60,7 @@ if (isset($_SESSION['loggedin'])){
                                 </li>
                                 <?php
                                     if($status == 'Logado') 
-                                        echo '<li> <a href="loginP.php"> Sair </a> </li>';                                
+                                        echo '<li> <a href="logout.php"> Sair </a> </li>';                                
                                 ?>
 
                             </ul>
