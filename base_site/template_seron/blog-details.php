@@ -1,3 +1,13 @@
+<?php
+session_start();
+// Verifica se a sessão está iniciada
+if (isset($_SESSION['loggedin'])){
+    $status = "Logado";
+} else {
+    $status = "Cadastre-se";
+}
+?>
+
 <!DOCTYPE php>
 <php>
     <head>
@@ -35,13 +45,24 @@
                             <ul class="dropdown menu">
                                 <li><a href="index.php">Página Inicial</a></li>
 
-                                <li><a href="blog.php">Blog</a></li>
+                                <li><a href="blog.php">Eventos</a></li>
 
                                 <li class='active'><a href="about-us.php">Sobre Nós</a></li>
 
                                 <li><a href="team.php">Autores</a></li>
 
-                                <li><a href="cadastro.php">Fale Conosco</a></li>
+                                <li>
+                                    <?php if($status == 'Logado'){
+                                        
+                                       echo '<a> Logado como:' . $_SESSION['user'] . ' </a>';
+                                    }else{
+                                        echo '<a href="cadastro.php">'  . $status . '</a>';
+                                    } ?>
+                                </li>
+                                <?php
+                                    if($status == 'Logado') 
+                                        echo '<li> <a href="logout.php"> Sair </a> </li>';                                
+                                ?>
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
