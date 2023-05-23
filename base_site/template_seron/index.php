@@ -6,6 +6,7 @@ if (isset($_SESSION['loggedin'])){
 } else {
     $status = "Cadastre-se";
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +63,7 @@ if (isset($_SESSION['loggedin'])){
                                     if($status == 'Logado') 
                                         echo '<li> <a href="logout.php"> Sair </a> </li>';                                
                                 ?>
-
+                <!-- gui chupa meu pipi -->
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
