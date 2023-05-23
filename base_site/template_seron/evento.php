@@ -8,7 +8,7 @@ class Evento{
     private $local;
     private $tipo_esporte;
     private $faixa_etaria;
-    
+    //oi
     function getId() {
         return $this->id;
     }
