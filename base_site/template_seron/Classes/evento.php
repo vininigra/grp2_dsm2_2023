@@ -25,11 +25,11 @@ class Evento{
                   VALUES (
                     '$data','$hora','$local','$tipo_esporte','$faixa_etaria')";
 
-            $p_sql = $this->connect->getConnection()->query($sql);
+            $this->connect->getConnection()->query($sql);
 
            
             
-            return $p_sql->execute();
+            
         } catch (Exception $e) {
             print "Erro ao Inserir Evento <br>" . $e . '<br>';
         }

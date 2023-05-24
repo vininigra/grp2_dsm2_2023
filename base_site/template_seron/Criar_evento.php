@@ -5,14 +5,15 @@
 
     //instancia as classes
     $evento = new evento();
-    $data = $_POST['data'];
-    $hora = $_POST['hora'];
-    $local = $_POST['local'];
-    $tipo_esporte = $_POST['tipo_esporte'];
-    $faixa_etaria = $_POST['faixa_etaria'];
+    
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
-        $evento->create($data, $hora, $local, $tipo_esporte, $faixa_etaria);
-
+        $data = $_POST['data'];
+        $hora = $_POST['hora'];
+        $local = $_POST['local'];
+        $tipo_esporte = $_POST['tipo_esporte'];
+        $faixa_etaria = $_POST['faixa_etaria'];
+        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria);
+        
     }
 ?>
 
