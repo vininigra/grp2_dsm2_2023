@@ -1,10 +1,17 @@
 <?php
+    session_start();
+    // Verifica se a sessão está iniciada
+    if (isset($_SESSION['loggedin'])){
+        $status = "Logado";
+        $sessao_id = $_SESSION['id'];
+    } else {
+        $status = "Cadastre-se";
+    }
     include_once "Classes/evento.php";
-    //include_once "cria_evento.php";
-    //include_once "coloborador_evento.php";
+   
 
     //instancia as classes
-    $evento = new evento();
+    
     
     if($_SERVER["REQUEST_METHOD"] == 'POST'){
         $data = $_POST['data'];
@@ -12,7 +19,8 @@
         $local = $_POST['local'];
         $tipo_esporte = $_POST['tipo_esporte'];
         $faixa_etaria = $_POST['faixa_etaria'];
-        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria);
+        $evento = new evento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+        $evento->createEvento();
         
     }
 ?>
@@ -89,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($eventodao->read() as $evento) : ?>
+                    <?php foreach ($evento->read() as $evento) : ?>
                         <tr>
                             <td><?= $evento->getId() ?></td>
                             <td><?= $evento->getData() ?></td>

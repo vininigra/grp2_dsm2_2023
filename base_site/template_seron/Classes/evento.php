@@ -9,21 +9,39 @@ class Evento{
     private $local;
     private $tipo_esporte;
     private $faixa_etaria;
+    private $sessao_id;
     private $connect;
 
-    function __construct(){
+    function __construct($data, $hora, $local, $tipo_esporte, $faixa_etaria,$sessao_id){
         $this->connect = new Conexao();
-
+        $this->data = $data;
+        $this->hora = $hora;
+        $this->local = $local;
+        $this->tipo_esporte = $tipo_esporte;
+        $this->faixa_etaria = $faixa_etaria;
+        $this->sessao_id = $sessao_id;
     }
-    public function createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria) {
+    // Metodo de insercao de eventos no banco de dados
+    public function createEvento() {
         try {
             
+            // Sanitização dos dados
+            $data = $this->sanitizeInput($this->data);
+            $hora = $this->sanitizeInput($this->hora);
+            $local = $this->sanitizeInput($this->local);
+            $tipo_esporte = $this->sanitizeInput($this->tipo_esporte);
+            $faixa_etaria = $this->sanitizeInput($this->faixa_etaria);
+            $sessao_id = $this->sanitizeInput($this->sessao_id);
+            // Validação de Dados
+            if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
+                throw new Exception("Todos os campos devem ser preenchidos.");
+            }
             
             
             $sql = "INSERT INTO Evento (                   
-                  data,hora,local,tipo_esporte,faixa_etaria)
+                  data,hora,local,tipo_esporte,faixa_etaria, fk_colaborador_id)
                   VALUES (
-                    '$data','$hora','$local','$tipo_esporte','$faixa_etaria')";
+                    '$data','$hora','$local','$tipo_esporte','$faixa_etaria','$sessao_id')";
 
             $this->connect->getConnection()->query($sql);
 
@@ -33,6 +51,20 @@ class Evento{
         } catch (Exception $e) {
             print "Erro ao Inserir Evento <br>" . $e . '<br>';
         }
+    }
+    //Metodo que realiza a validacao dos dados
+    private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
+
+    }
+    // Metodo que realize a Sanitizacao dos dados
+    private function sanitizeInput($input) {
+        // Limpeza de entrada
+        $input = trim($input);
+        $input = htmlspecialchars($input);
+    
+        
+    
+        return $input;
     }
     function getId() {
         return $this->id;

@@ -80,8 +80,10 @@ class Colaborador extends Pessoa{
             $hash = $row['senha'];
             if($this->comparaSenhaBanco($senha, $hash) === TRUE){
                 $_SESSION['id'] = $row['id'];
+                $_SESSION['user'] = $row['nome'];
+                $_SESSION['loggedin'] = TRUE;
                 echo "Login realizado com sucesso!";
-                header('location:index.html');
+                header('location:index.php');
             }else{
                 return "Email ou senha incorretos";
             }
