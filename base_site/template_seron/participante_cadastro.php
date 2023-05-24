@@ -1,5 +1,5 @@
 <?php
-
+require_once('Classes/evento.php');
 require_once('Classes/Participante.php');
 // Backend do cadastro de usuários do HTML
 
@@ -8,8 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   
     
     
-
-    $participante = new Participante($servername, $username, $password, $dbname);
+    $evento = new Evento();
+    $participante = new Participante();
     //Declarando as variaveis recebidas via POST
     $nome = $_POST['name'];
     $email = $_POST['email'];

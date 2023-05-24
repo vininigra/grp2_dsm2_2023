@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     
 
-    $colaborador = new Colaborador($servername, $username, $password, $dbname);
+    $colaborador = new Colaborador();
     //Declarando as variaveis recebidas via POST
     $nome = $_POST['name'];
     $email = $_POST['email'];

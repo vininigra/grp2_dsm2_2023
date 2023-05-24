@@ -1,14 +1,39 @@
 <?php
+require_once('Conexao.php');
 
 class Evento{
     
-    private $id;
+    
     private $data;
     private $hora;
     private $local;
     private $tipo_esporte;
     private $faixa_etaria;
+    private $connect;
 
+    function __construct(){
+        $this->connect = new Conexao();
+
+    }
+    public function createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria) {
+        try {
+            
+            
+            
+            $sql = "INSERT INTO Evento (                   
+                  data,hora,local,tipo_esporte,faixa_etaria)
+                  VALUES (
+                    '$data','$hora','$local','$tipo_esporte','$faixa_etaria')";
+
+            $p_sql = $this->connect->getConnection()->query($sql);
+
+           
+            
+            return $p_sql->execute();
+        } catch (Exception $e) {
+            print "Erro ao Inserir Evento <br>" . $e . '<br>';
+        }
+    }
     function getId() {
         return $this->id;
     }
@@ -57,7 +82,10 @@ class Evento{
         $this->faixa_etaria = $faixa_etaria;
     }
 
-    
+    function __destruct(){
+        $this->connect->closeConnection();
+
+    }
 }
 ?>
 

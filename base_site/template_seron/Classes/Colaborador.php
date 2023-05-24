@@ -5,8 +5,8 @@ require_once('Pessoa.php');
 class Colaborador extends Pessoa{
     private $cpf, $senha,$connect;
     // Instancia um objeto Colaborador conectando ao banco de dados
-    function __construct($servername, $username, $password, $dbname){
-        $this->connect = new Conexao($servername, $username, $password, $dbname);
+    function __construct(){
+        $this->connect = new Conexao();
     }
     // Sanitizacao dos dados para dificultar SQL Injection
     private function sanitizacao($nome, $cpf, $email, $senha){

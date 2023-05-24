@@ -1,11 +1,19 @@
 <?php
-include_once "Classes/Conexao_evento.php";
-include_once "cria_evento.php";
-include_once "coloborador_evento.php";
+    include_once "Classes/evento.php";
+    //include_once "cria_evento.php";
+    //include_once "coloborador_evento.php";
 
-//instancia as classes
-$evento = new Evento();
-$eventodao = new EventoDAO();
+    //instancia as classes
+    $evento = new evento();
+    $data = $_POST['data'];
+    $hora = $_POST['hora'];
+    $local = $_POST['local'];
+    $tipo_esporte = $_POST['tipo_esporte'];
+    $faixa_etaria = $_POST['faixa_etaria'];
+    if($_SERVER["REQUEST_METHOD"] == 'POST'){
+        $evento->create($data, $hora, $local, $tipo_esporte, $faixa_etaria);
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +45,7 @@ $eventodao = new EventoDAO();
         </div>
     </nav>
     <div class="container">
-        <form action="app/controller/UsuarioController.php" method="POST">
+        <form action="" method="POST">
             <div class="row">
                 <div class="col-md-3">
                     <label>Data</label>

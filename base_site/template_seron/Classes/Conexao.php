@@ -1,11 +1,15 @@
 <?php
-require_once('dados.php');
+
 
 class Conexao {
-    private $conn;
+    private $conn ;
+    private $servername = "localhost";
+    private $username = "root";
+    private $password ="";
+    private $dbname="seron";
 
-    function __construct($servername, $username, $password,$dbname){
-        $this->conn = new mysqli($servername, $username, $password,$dbname);
+    function __construct(){
+        $this->conn = new mysqli($this->servername, $this->username, $this->password,$this->dbname);
         $this->checarConexao();
     }
 

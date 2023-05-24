@@ -6,8 +6,8 @@ require_once('Conexao.php');
 class Participante extends Pessoa {
     private $idade;
     private $connect;
-    function __construct($servername, $username, $password, $dbname){
-        $this->connect = new Conexao($servername, $username, $password, $dbname);
+    function __construct(){
+        $this->connect = new Conexao();
         
     }
     private function sanitizar($nome, $idade, $email, $senha){
