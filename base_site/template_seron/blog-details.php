@@ -45,7 +45,7 @@ if (isset($_SESSION['loggedin'])){
                             <ul class="dropdown menu">
                                 <li><a href="index.php">Página Inicial</a></li>
 
-                                <li><a href="blog.php">Eventos</a></li>
+                                <li><a href="eventos.php">Eventos</a></li>
 
                                 <li class='active'><a href="about-us.php">Sobre Nós</a></li>
 

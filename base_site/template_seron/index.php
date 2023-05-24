@@ -45,7 +45,7 @@ if (isset($_SESSION['loggedin'])){
                             <ul class="dropdown menu">
                                 <li class='active'><a href="index.php">Página Inicial</a></li>
 
-                                <li><a href="blog.php">Eventos</a></li>
+                                <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
 
@@ -63,7 +63,7 @@ if (isset($_SESSION['loggedin'])){
                                     if($status == 'Logado') 
                                         echo '<li> <a href="logout.php"> Sair </a> </li>';                                
                                 ?>
-                <!-- gui chupa meu pipi -->
+
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>
