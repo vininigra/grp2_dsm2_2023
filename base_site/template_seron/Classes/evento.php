@@ -12,19 +12,19 @@ class Evento{
     private $sessao_id;
     private $connect;
 
-    function __construct($data, $hora, $local, $tipo_esporte, $faixa_etaria,$sessao_id){
+    function __construct(){
         $this->connect = new Conexao();
-        $this->data = $data;
-        $this->hora = $hora;
-        $this->local = $local;
-        $this->tipo_esporte = $tipo_esporte;
-        $this->faixa_etaria = $faixa_etaria;
-        $this->sessao_id = $sessao_id;
+    
     }
     // Metodo de insercao de eventos no banco de dados
-    public function createEvento() {
+    public function createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id) {
         try {
-            
+            $this->data = $data;
+            $this->hora = $hora;
+            $this->local = $local;
+            $this->tipo_esporte = $tipo_esporte;
+            $this->faixa_etaria = $faixa_etaria;
+            $this->sessao_id = $sessao_id;
             // Sanitização dos dados
             $data = $this->sanitizeInput($this->data);
             $hora = $this->sanitizeInput($this->hora);

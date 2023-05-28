@@ -21,9 +21,9 @@
         $tipo_esporte = $_POST['tipo_esporte'];
         $faixa_etaria = $_POST['faixa_etaria'];
         // Instanciando Objeto evento inserindo os dados do evento a ser criado
-        $evento = new evento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+        $evento = new evento();
         // Chamada do metodo para criar os eventos
-        $evento->createEvento();
+        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
         
     }
 ?>
