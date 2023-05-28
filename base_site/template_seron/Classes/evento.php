@@ -3,7 +3,6 @@ require_once('Conexao.php');
 
 class Evento{
     
-    
     private $data;
     private $hora;
     private $local;
@@ -12,19 +11,19 @@ class Evento{
     private $sessao_id;
     private $connect;
 
-    function __construct(){
+    function __construct($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
         $this->connect = new Conexao();
-    
+        $this->data = $data;
+        $this->hora = $hora;
+        $this->local = $local;
+        $this->tipo_esporte = $tipo_esporte;
+        $this->faixa_etaria = $faixa_etaria;
+        $this->sessao_id = $sessao_id;
     }
+    
     // Metodo de insercao de eventos no banco de dados
-    public function createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id) {
+    public function createEvento() {
         try {
-            $this->data = $data;
-            $this->hora = $hora;
-            $this->local = $local;
-            $this->tipo_esporte = $tipo_esporte;
-            $this->faixa_etaria = $faixa_etaria;
-            $this->sessao_id = $sessao_id;
             // Sanitização dos dados
             $data = $this->sanitizeInput($this->data);
             $hora = $this->sanitizeInput($this->hora);
@@ -32,42 +31,94 @@ class Evento{
             $tipo_esporte = $this->sanitizeInput($this->tipo_esporte);
             $faixa_etaria = $this->sanitizeInput($this->faixa_etaria);
             $sessao_id = $this->sanitizeInput($this->sessao_id);
+            
             // Validação de Dados
             if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
                 throw new Exception("Todos os campos devem ser preenchidos.");
             }
             
-            
-            $sql = "INSERT INTO Evento (                   
-                  data,hora,local,tipo_esporte,faixa_etaria, fk_colaborador_id)
-                  VALUES (
-                    '$data','$hora','$local','$tipo_esporte','$faixa_etaria','$sessao_id')";
+            $conexao = $this->connect->getConnection();
+            $sql = "INSERT INTO Evento (data, hora, local, tipo_esporte, faixa_etaria, fk_colaborador_id)
+                  VALUES (?, ?, ?, ?, ?, ?)";
 
-            $this->connect->getConnection()->query($sql);
-
-           
-            
+            $stmt = $conexao->prepare($sql);
+            $stmt->bind_param("sssssi", $data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+            $stmt->execute();
             
         } catch (Exception $e) {
-            print "Erro ao Inserir Evento <br>" . $e . '<br>';
+            echo "Erro ao Inserir Evento: " . $e->getMessage();
         }
     }
-    //Metodo que realiza a validacao dos dados
-    private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
-
+    
+    public function read() {
+        try {
+            $conexao = $this->connect->getConnection();
+            $sql = "SELECT * FROM evento ORDER BY id ASC";
+            $result = $conexao->query($sql);
+            $lista = array();
+            while ($row = $result->fetch_assoc()) {
+                $lista[] = $this->listaEventos($row);
+            }
+            return $lista;
+        } catch (Exception $e) {
+            echo "Ocorreu um erro ao tentar Buscar Todos: " . $e->getMessage();
+        }
     }
-    // Metodo que realize a Sanitizacao dos dados
+    
+    private function listaEventos($row) {
+        $evento = new Evento($row['data'], $row['hora'], $row['local'], $row['tipo_esporte'], $row['faixa_etaria'], $row['fk_colaborador_id']);
+        return $evento;
+    }
+
+    public function update(Evento $evento) {
+        try {
+            $conexao = $this->connect->getConnection();
+            $sql = "UPDATE evento SET
+                  data = ?,
+                  hora = ?,
+                  local = ?,
+                  tipo_esporte = ?,
+                  faixa_etaria = ?               
+                  WHERE id = ?";
+                  
+            $stmt = $conexao->prepare($sql);
+            $stmt->bind_param("sssssi", $evento->getData(), $evento->getHora(), $evento->getLocal(), $evento->getTipo_esporte(), $evento->getFaixa_etaria(), $evento->getId());
+            $stmt->execute();
+            
+        } catch (Exception $e) {
+            echo "Ocorreu um erro ao tentar fazer Update: " . $e->getMessage();
+        }
+    }
+
+    public function delete(Evento $evento) {
+        try {
+            $conexao = $this->connect->getConnection();
+            $sql = "DELETE FROM evento WHERE id = ?";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bind_param("i", $evento->getId());
+            $stmt->execute();
+            
+        } catch (Exception $e) {
+            echo "Erro ao Excluir Evento: " . $e->getMessage();
+        }
+    }
+    
+    // Método que realiza a validação dos dados
+    private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
+        // Implemente a validação dos dados conforme necessário
+    }
+    
+    // Método que realiza a Sanitização dos dados
     private function sanitizeInput($input) {
         // Limpeza de entrada
         $input = trim($input);
         $input = htmlspecialchars($input);
     
-        
-    
         return $input;
     }
+    
     function getId() {
-        return $this->id;
+        return $this->sessao_id;
     }
 
     function getData() {
@@ -91,7 +142,7 @@ class Evento{
     }
 
     function setId($id) {
-        $this->id = $id;
+        $this->sessao_id = $id;
     }
 
     function setData($data) {
@@ -116,8 +167,47 @@ class Evento{
 
     function __destruct(){
         $this->connect->closeConnection();
-
     }
 }
-?>
 
+//Evento Controller
+//Instancia a classe Evento
+$evento = new Evento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+
+$d = filter_input_array(INPUT_POST);
+
+// se a operação for cadastrar, entra nessa condição
+if (isset($_POST['cadastrar'])) {
+    $evento->setData($d['data']);
+    $evento->setHora($d['hora']);
+    $evento->setLocal($d['local']);
+    $evento->setTipo_esporte($d['tipo_esporte']);
+    $evento->setFaixa_etaria($d['faixa_etaria']);
+
+    $evento->createEvento();
+
+    header("Location: ".$_SERVER['PHP_SELF']);
+} 
+// se a requisição for editar
+else if (isset($_POST['editar'])) {
+    $evento->setId($d['id']);
+    $evento->setData($d['data']);
+    $evento->setHora($d['hora']);
+    $evento->setLocal($d['local']);
+    $evento->setTipo_esporte($d['tipo_esporte']);
+    $evento->setFaixa_etaria($d['faixa_etaria']);
+
+    $evento->update($evento);
+
+    header("Location: ".$_SERVER['PHP_SELF']);
+}
+// se a requisição for deletar
+else if (isset($_GET['del'])) {
+    $evento->setId($_GET['del']);
+
+    $evento->delete($evento);
+
+    header("Location: ".$_SERVER['PHP_SELF']);
+} else {
+    header("Location: ".$_SERVER['PHP_SELF']);
+}
