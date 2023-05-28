@@ -78,17 +78,7 @@ class EventoDAO{
 
     
 
-    private function listaEventos($row) {
-        $evento = new Evento();
-        $evento->setId($row['id']);
-        $evento->setData($row['data']);
-        $evento->setHora($row['hora']);
-        $evento->setLocal($row['local']);
-        $evento->setTipo_esporte($row['tipo_esporte']);
-        $evento->setFaixa_etaria($row['faixa_etaria']);
-
-        return $evento;
-    }
+    
  }
 
  ?>
