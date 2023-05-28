@@ -5,7 +5,7 @@
         $status = "Logado";
         $sessao_id = $_SESSION['id'];
     } else {
-        $status = "Cadastre-se";
+        header('location: index.php');
     }
     include_once "Classes/evento.php";
    
@@ -13,18 +13,19 @@
     //instancia as classes
     
     
-    if($_SERVER["REQUEST_METHOD"] == 'POST'){
-        // Criando variaveis para receber as informacoes do formulario
-        $data = $_POST['data'];
-        $hora = $_POST['hora'];
-        $local = $_POST['local'];
-        $tipo_esporte = $_POST['tipo_esporte'];
-        $faixa_etaria = $_POST['faixa_etaria'];
-        // Instanciando Objeto evento inserindo os dados do evento a ser criado
-        $evento = new evento();
-        // Chamada do metodo para criar os eventos
-        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
-        
+    if ($_SERVER["REQUEST_METHOD"] == 'POST') {
+        if (isset($_POST['cadastrar'])) {
+            // Criando variáveis para receber as informações do formulário
+            $data = $_POST['data'];
+            $hora = $_POST['hora'];
+            $local = $_POST['local'];
+            $tipo_esporte = $_POST['tipo_esporte'];
+            $faixa_etaria = $_POST['faixa_etaria'];
+    
+            // Instanciando objeto evento e chamando o método para criar o evento
+            $evento = new Evento();
+            $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+        }
     }
 ?>
 
@@ -100,7 +101,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($evento->read() as $evento) : ?>
+                    <?php foreach ($evento->read($sessao_id) as $evento) : ?>
                         <tr>
                             <td><?= $evento->getId() ?></td>
                             <td><?= $evento->getData() ?></td>

@@ -113,7 +113,32 @@ class Evento{
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
     }
-
+    public function read($sessao_id) {
+        try {
+            $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
+            $result = $this->connect->getConnection()->query($sql);
+            
+            $f_lista = array();
+            while ($row = $result->fetch_assoc()) {
+                $f_lista[] = $this->listaEventos($row);
+            }
+            unset($evento);
+            return $f_lista;
+        } catch (Exception $e) {
+            print "Ocorreu um erro ao tentar Buscar Todos." . $e;
+        }
+    }
+    private function listaEventos($row) {
+        $evento = new Evento();
+        $evento->setId($row['id']);
+        $evento->setData($row['data']);
+        $evento->setHora($row['hora']);
+        $evento->setLocal($row['local']);
+        $evento->setTipo_esporte($row['tipo_esporte']);
+        $evento->setFaixa_etaria($row['faixa_etaria']);
+    
+        return $evento;
+    }
     function __destruct(){
         $this->connect->closeConnection();
 
