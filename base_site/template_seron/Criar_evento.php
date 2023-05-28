@@ -26,19 +26,8 @@
             $evento = new Evento();
             $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
         }
-    if($_SERVER["REQUEST_METHOD"] == 'POST'){
-        // Criando variaveis para receber as informacoes do formulario
-        $data = $_POST['data'];
-        $hora = $_POST['hora'];
-        $local = $_POST['local'];
-        $tipo_esporte = $_POST['tipo_esporte'];
-        $faixa_etaria = $_POST['faixa_etaria'];
-        // Instanciando Objeto evento inserindo os dados do evento a ser criado
-        $evento = new evento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
-        // Chamada do metodo para criar os eventos
-        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
-        
     }
+  
 ?>
 
 <!DOCTYPE html>
