@@ -1,11 +1,15 @@
 <?php
 session_start();
+
 // Verifica se a sessão está iniciada
 if (isset($_SESSION['loggedin'])){
     $status = "Logado";
+    $colaborador = $_SESSION['colaborador'];
 } else {
     $status = "Cadastre-se";
+    
 }
+
 ?>
 <!DOCTYPE php>
 <php>
@@ -41,27 +45,31 @@ if (isset($_SESSION['loggedin'])){
                             <img src="img/logo2.png" alt="Venue Logo" width="220" height="100">
                         </div></a>
                         <nav id="primary-nav" class="dropdown cf">
-                            <ul class="dropdown menu">
-                                <li><a href="index.php">Página Inicial</a></li>
+                        <ul class="dropdown menu">
+                                <li class='active'><a href="index.php">Página Inicial</a></li>
 
                                 <li><a href="eventos.php">Eventos</a></li>
 
-                                <li class='active'><a href="about-us.php">Sobre Nós</a></li>
+                                <li><a href="about-us.php">Sobre Nós</a></li>
 
                                 <li><a href="team.php">Autores</a></li>
-
+                                
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
-                                       echo '<a> Logado como:' . $_SESSION['user'] . ' </a>';
+                                       echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
                                     }else{
                                         echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>
                                 </li>
                                 <?php
-                                    if($status == 'Logado') 
-                                        echo '<li> <a href="logout.php"> Sair </a> </li>';                                
+                                    if($status == 'Logado'){
+                                        echo '<li> <a href="logout.php"> Sair </a> </li>';
+                                        if($colaborador == TRUE) 
+                                            echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
+                                    }         
                                 ?>
+                                
                             </ul>
                         </nav><!-- / #primary-nav -->
                     </div>

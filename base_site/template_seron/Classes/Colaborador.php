@@ -82,6 +82,7 @@ class Colaborador extends Pessoa{
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user'] = $row['nome'];
                 $_SESSION['loggedin'] = TRUE;
+                $_SESSION['colaborador'] = TRUE;
                 echo "Login realizado com sucesso!";
                 header('location:index.php');
             }else{

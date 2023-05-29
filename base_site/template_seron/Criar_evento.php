@@ -54,7 +54,7 @@
     <nav class="navbar navbar-light bg-light menu">
         <div class="container">
             <a class="navbar-brand" href="#">
-                CRUD PHP POO
+                Cadastro de Eventos
             </a>
         </div>
     </nav>
