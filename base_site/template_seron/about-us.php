@@ -95,36 +95,41 @@ if (isset($_SESSION['loggedin'])){
         <section class="our-services">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-9">
                         <div class="left-content">
                             <br>
                             <h4>Um pouco sobre a equipe</h4>
-                            <p>Aenean hendrerit metus leo, quis viverra purus condimentum nec. Pellentesque a sem semper, lobortis mauris non, varius urna. Quisque sodales purus eu tellus fringilla.<br><br>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst. Vel sequi odit similique repudiandae ipsum iste, quidem tenetur id impedit, eaque et, aliquam quod.</p>
-
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cupiditate id unde quis ut maxime, accusantium aperiam consectetur saepe delectus ducimus accusamus, ad doloremque ea. Quam, suscipit quidem perspiciatis asperiores, libero cum saepe hic pariatur eos deleniti illum minima minus.</p>
+                            <p>O grupo Seron é uma equipe altamente qualificada e apaixonada por desenvolvimento de software web, focada em criar soluções inovadoras para promover a saúde e o bem-estar. Composto por cinco profissionais especializados, o grupo reúne talentos diversos e complementares, combinando habilidades técnicas, conhecimento em saúde e uma visão empreendedora.</p>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <img src="img/about-1-720x480.jpg" class="img-fluid" alt="">
+                    <div class="col-md-3">
+                        <div class="right-content">
+                            <img src="img/Teste_1_simbolo_e_tipografia_2.png" class="img-fluid" alt="">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="video-container">
+        <section id="banner-goals">
             <div class="video-overlay"></div>
             <div class="video-content">
                 <div class="inner">
                       <div class="section-heading">
-                          <span>Lorem ipsum dolor.</span>
-                          <h2>Vivamus nec vehicula felis</h2>
+                          <h2>Objetivos:</h2>
+                            <p>O grupo Seron busca revolucionar o setor de saúde e bem-estar, fornecendo uma plataforma web inovadora e abrangente. Seus principais objetivos são:</p>
                       </div>
                       <!-- Modal button -->
 
                       <div class="container">
                         <div class="row">
-                            <div class="col-lg-10 col-lg-offset-1">
-                                <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi blanditiis, esse deserunt assumenda! Tempora nulla natus illum soluta quasi, nisi, in quaerat cumque corrupti ipsum impedit necessitatibus expedita minus harum, fuga id aperiam autem architecto odio. Perferendis eius possimus ex itaque tenetur saepe id quis dicta voluptas, corrupti sapiente hic!</p>
+                            <div class="col-lg-7 col-lg-offset-1">
+                            
+                            <p>1. Desenvolver uma plataforma segura e confiável que ofereça uma ampla gama de recursos relacionados à saúde e bem-estar, como monitoramento de atividades físicas, acompanhamento de eventos esportivos, gestão dos eventos e acesso a informações relevantes sobre saúde.</p>
+                            <p>2. Criar uma experiência do usuário excepcional, garantindo que a plataforma seja intuitiva, fácil de usar e agradável para todos os usuários, independentemente de seu nível de conhecimento em tecnologia.</p>
+                            <p>3. Integrar a plataforma com dispositivos e tecnologias existentes no mercado, como wearables e aplicativos de monitoramento, permitindo uma coleta de dados precisa e em tempo real para os usuários.</p>
+                            <p>4. Estabelecer parcerias com profissionais da área de saúde e bem-estar, como médicos, nutricionistas e psicólogos, a fim de fornecer informações confiáveis e personalizadas aos usuários.</p>
+                        
                             </div>
                         </div>
                       </div>
