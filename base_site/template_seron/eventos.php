@@ -51,8 +51,6 @@ if (isset($_SESSION['loggedin'])){
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-
-                                <li><a href="team.php">Autores</a></li>
                                 
                                 <li>
                                     <?php if($status == 'Logado'){

@@ -664,10 +664,10 @@ section.banner {
 
 .featured-places .featured-item .down-content .text-button {
   text-align: center;
-  height: 50px;
-  line-height: 50px;
+  line-height: 30px;
   border-top: 1px solid #ddd;
-  margin: 0px -20px;
+  height: 30px;
+  margin: 0px -10px;
 }
 
 .featured-places .featured-item .down-content .first-button {
@@ -677,8 +677,8 @@ section.banner {
 .featured-places .featured-item .down-content .text-button a {
   font-size: 12px;
   text-transform: uppercase;
-  color: #7a7a7a;
-  letter-spacing: 0.5px;
+  color: #464646;
+  letter-spacing: 0.2px;
   text-decoration: none;
   display: inline-block;
   width: 100%;
@@ -734,7 +734,7 @@ section.our-services .service-item h4 {
 .accordion li .accordion-trigger {
   border: 1px solid #ddd;
 }
-.accordion li:last-child .accordion-trigger  {
+.accordion li:last-child .accordion-trigger {
   
 }
 .accordion-content {
@@ -1097,6 +1097,7 @@ textarea.form-control {
   //background-color: #fff;
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 }
+
 .modal-animated-in {
   animation: totop-in .3s ease;
 }

@@ -53,8 +53,6 @@ if (isset($_SESSION['loggedin'])){
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-
-                                <li><a href="team.php">Autores</a></li>
                                 
                                 <li>
                                     <?php if($status == 'Logado'){
@@ -215,36 +213,27 @@ if (isset($_SESSION['loggedin'])){
                         <div class="logo">
                             <img src="img/logo2.png" alt="Venue Logo" width="200" height="100">
                         </div>
-                        <p>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellustea dictumst.</p>
-                        <ul class="social-icons">
-                            <li>
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
-                            </li>
-                        </ul>
-                    </div>
+                        <p>Nosso objetivo é incentivar o antii-sedentarismo, visando a saúde e bem estar da população mais jovem.</p>
+                </div>
                 </div>
                 <div class="col-md-4">
                     <div class="useful-links">
                         <div class="footer-heading">
-                            <h4>Useful Links</h4>
+                            <h4>Links rápidos</h4>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <ul>
-                                    <li><a href="inde.php"><i class="fa fa-stop"></i>Home</a></li>
-                                    <li><a href="about.php"><i class="fa fa-stop"></i>About</a></li>
-                                    <li><a href="team.php"><i class="fa fa-stop"></i>Team</a></li>
-                                    <li><a href="contact.php"><i class="fa fa-stop"></i>Contact Us</a></li>
+                                    <li><a href="index.php"><i class="fa fa-stop"></i>Página Inicial</a></li>
+                                    <li><a href="about.php"><i class="fa fa-stop"></i>Sobre Nós</a></li>
+                                    <li><a href="contact.php"><i class="fa fa-stop"></i>Fale Conosco</a></li>
                                 </ul>
                             </div>
                             <div class="col-md-6">
                                 <ul>
-                                    <li><a href="faq.php"><i class="fa fa-stop"></i>FAQ</a></li>
-                                    <li><a href="testimonials.php"><i class="fa fa-stop"></i>Testimonials</a></li>
-                                    <li><a href="blog.php"><i class="fa fa-stop"></i>Blog</a></li>
-                                    <li><a href="terms.php"><i class="fa fa-stop"></i>Terms</a></li>
+                                    <li><a href="team.php"><i class="fa fa-stop"></i>Autores</a></li>
+                                    <li><a href="blog.php"><i class="fa fa-stop"></i>Eventos</a></li>
+                                    <li><a href="terms.php"><i class="fa fa-stop"></i>Termos</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -253,12 +242,12 @@ if (isset($_SESSION['loggedin'])){
                 <div class="col-md-3">
                     <div class="contact-info">
                         <div class="footer-heading">
-                            <h4>Contact Information</h4>
+                            <h4>Informações de contato</h4>
                         </div>
-                        <p><i class="fa fa-map-marker"></i> 212 Barrington Court New York, ABC</p>
+                        <p><i class="fa fa-map-marker"></i> Fatec Araras, SP</p>
                         <ul>
-                            <li><span>Phone:</span><a href="#">+1 333 4040 5566</a></li>
-                            <li><span>Email:</span><a href="#">contact@company.com</a></li>
+                            <li><span>Phone:</span><a href="#">+55 19 99999-9999</a></li>
+                            <li><span>Email:</span><a href="#">sac@seron.com.br</a></li>
                         </ul>
                     </div>
                 </div>
@@ -267,7 +256,7 @@ if (isset($_SESSION['loggedin'])){
     </footer>
 
     <div class="sub-footer">
-        <p>Copyright © 2023 Seron  - Criadores: <a href="https://github.com/matheusoms/grp2_dsm2_2023">Seron/Github</a></p>
+        <p>Copyright © 2023 SERON - Conheça mais sobre: <a href="https://periodic-word-7f5.notion.site/SERON-4ab5a4c87629464c9faf2b9417301042">Seron.com</a></p>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
@@ -279,4 +268,4 @@ if (isset($_SESSION['loggedin'])){
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
 </body>
-</php>
+</html>

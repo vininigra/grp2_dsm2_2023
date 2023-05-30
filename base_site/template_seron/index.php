@@ -51,8 +51,6 @@ if (isset($_SESSION['loggedin'])){
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-
-                                <li><a href="team.php">Autores</a></li>
                                 
                                 <li>
                                     <?php if($status == 'Logado'){
@@ -64,9 +62,9 @@ if (isset($_SESSION['loggedin'])){
                                 </li>
                                 <?php
                                     if($status == 'Logado'){
-                                        echo '<li> <a href="logout.php"> Sair </a> </li>';
                                         if($colaborador == TRUE) 
                                             echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
                                     }         
                                 ?>
                                 
