@@ -125,7 +125,7 @@ if (isset($_SESSION['loggedin'])){
                         <div class="featured-item">
                             <div class="down-content">
                                 <div class="text-button">
-                                    <a href="loginP.php">Entrar</a>
+                                    <a href="login.php">Entrar</a>
                                 </div>
                             </div>
                         </div>
