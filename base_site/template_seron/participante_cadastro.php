@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Destroi o objeto participante e fecha a conexao com o banco de dados
     unset($participante);
+    header('location: index.php');
 }
 
 ?>
