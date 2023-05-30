@@ -3,7 +3,7 @@ require_once('Conexao.php');
 
 class Evento{
     
-    
+    private $id;
     private $data;
     private $hora;
     private $local;
@@ -25,6 +25,7 @@ class Evento{
             $this->tipo_esporte = $tipo_esporte;
             $this->faixa_etaria = $faixa_etaria;
             $this->sessao_id = $sessao_id;
+            
             // Sanitização dos dados
             $data = $this->sanitizeInput($this->data);
             $hora = $this->sanitizeInput($this->hora);
@@ -52,6 +53,8 @@ class Evento{
             print "Erro ao Inserir Evento <br>" . $e . '<br>';
         }
     }
+
+
     //Metodo que realiza a validacao dos dados
     private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
 
@@ -66,6 +69,7 @@ class Evento{
     
         return $input;
     }
+
     function getId() {
         return $this->id;
     }
@@ -113,6 +117,7 @@ class Evento{
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
     }
+    
     public function read($sessao_id) {
         try {
             $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
@@ -127,6 +132,7 @@ class Evento{
         } catch (Exception $e) {
             print "Ocorreu um erro ao tentar Buscar Todos." . $e;
         }
+        header("Location: lista_evento.php");
     }
     private function listaEventos($row) {
         $evento = new Evento();
@@ -138,7 +144,46 @@ class Evento{
         $evento->setFaixa_etaria($row['faixa_etaria']);
     
         return $evento;
+        header("Location: lista_evento.php");
     }
+
+    public function update(Evento $evento) {
+        try {
+            $conexao = $this->connect->getConnection();
+            $sql = "UPDATE evento SET
+                    data = ?,
+                    hora = ?,
+                    local = ?,
+                    tipo_esporte = ?,
+                    faixa_etaria = ?
+                    WHERE id = ?";
+                  
+            $stmt = $conexao->prepare($sql);
+            $stmt->bind_param("sssssi", $evento->getData(), $evento->getHora(), $evento->getLocal(), $evento->getTipo_esporte(), $evento->getFaixa_etaria(), $evento->getId());
+            $stmt->execute();
+            
+        } catch (Exception $e) {
+            echo "Ocorreu um erro ao tentar fazer Update: " . $e->getMessage();
+        }
+        header('Location: lista_evento.php');
+        exit();
+    }
+
+    public function delete($eventoId) {
+        try {
+            $conexao = $this->connect->getConnection();
+            $sql = "DELETE FROM evento WHERE id = ?";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bind_param("i", $eventoId);
+            $stmt->execute();
+            
+        } catch (Exception $e) {
+            echo "Erro ao Excluir Evento: " . $e->getMessage();
+        }
+        header("Location: ../../");
+        exit();
+    }
+    
     function __destruct(){
         $this->connect->closeConnection();
 
