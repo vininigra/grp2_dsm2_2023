@@ -1,10 +1,13 @@
 <?php
 session_start();
+
 // Verifica se a sessão está iniciada
 if (isset($_SESSION['loggedin'])){
     $status = "Logado";
+    $colaborador = $_SESSION['colaborador'];
 } else {
     $status = "Cadastre-se";
+    
 }
 ?>
 
@@ -48,7 +51,6 @@ if (isset($_SESSION['loggedin'])){
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-                                
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
@@ -59,9 +61,9 @@ if (isset($_SESSION['loggedin'])){
                                 </li>
                                 <?php
                                     if($status == 'Logado'){
-                                        echo '<li> <a href="logout.php"> Sair </a> </li>';
                                         if($colaborador == TRUE) 
                                             echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
                                     }         
                                 ?>
                                 
@@ -99,7 +101,7 @@ if (isset($_SESSION['loggedin'])){
                 </div> 
 
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
                             <div class="featured-item">
                                 <div class="down-content">
                                     <div class="text-button">
@@ -109,7 +111,7 @@ if (isset($_SESSION['loggedin'])){
                             </div>
                         </div>
 
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="featured-item">
                             <div class="down-content">
                                 <div class="text-button">
@@ -119,26 +121,15 @@ if (isset($_SESSION['loggedin'])){
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-md-4 col-sm-6 col-xs-12">
                         <div class="featured-item">
                             <div class="down-content">
                                 <div class="text-button">
-                                    <a href="loginP.php">Entre como participante</a>
+                                    <a href="loginP.php">Entrar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-md-3 col-sm-6 col-xs-12">
-                        <div class="featured-item">
-                            <div class="down-content">
-                                <div class="text-button">
-                                    <a href="loginC.php">Entre como colaborador</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>

@@ -61,11 +61,11 @@ if (isset($_SESSION['loggedin'])){
                                     } ?>
                                 </li>
                                 <?php
-                                    if($status == 'Logado'){
+                                   if($status == 'Logado'){
+                                    if($colaborador == TRUE) 
+                                        echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
                                         echo '<li> <a href="logout.php"> Sair </a> </li>';
-                                        if($colaborador == TRUE) 
-                                            echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
-                                    }         
+                                }          
                                 ?>
                                 
                             </ul>

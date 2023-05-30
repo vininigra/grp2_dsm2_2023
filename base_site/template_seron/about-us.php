@@ -64,9 +64,9 @@ if (isset($_SESSION['loggedin'])){
                                 </li>
                                 <?php
                                     if($status == 'Logado'){
-                                        echo '<li> <a href="logout.php"> Sair </a> </li>';
                                         if($colaborador == TRUE) 
                                             echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
                                     }         
                                 ?>
                                 
@@ -78,13 +78,13 @@ if (isset($_SESSION['loggedin'])){
         </header>
     </div>
       
-    <section class="banner banner-secondary" id="top" style="background-image: url(img/banner-image-1-1920x300.jpg);">
+    <section class="banner banner-secondary" id="top" style="background-image: url(img/banner_eventos.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="banner-caption">
                         <div class="line-dec"></div>
-                        <h2>About Us</h2>
+                        <h2>Sobre nós</h2>
                     </div>
                 </div>
             </div>
@@ -98,7 +98,7 @@ if (isset($_SESSION['loggedin'])){
                     <div class="col-md-7">
                         <div class="left-content">
                             <br>
-                            <h4>About us</h4>
+                            <h4>Um pouco sobre a equipe</h4>
                             <p>Aenean hendrerit metus leo, quis viverra purus condimentum nec. Pellentesque a sem semper, lobortis mauris non, varius urna. Quisque sodales purus eu tellus fringilla.<br><br>Mauris sit amet quam congue, pulvinar urna et, congue diam. Suspendisse eu lorem massa. Integer sit amet posuere tellus, id efficitur leo. In hac habitasse platea dictumst. Vel sequi odit similique repudiandae ipsum iste, quidem tenetur id impedit, eaque et, aliquam quod.</p>
 
                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure cupiditate id unde quis ut maxime, accusantium aperiam consectetur saepe delectus ducimus accusamus, ad doloremque ea. Quam, suscipit quidem perspiciatis asperiores, libero cum saepe hic pariatur eos deleniti illum minima minus.</p>
@@ -137,8 +137,8 @@ if (isset($_SESSION['loggedin'])){
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-heading">
-                            <span>Team</span>
-                            <h2>Lorem ipsum dolor sit amet</h2>
+                            <span>Equipe</span>
+                            <h2>Time de desenvolvimento</h2>
                         </div>
                     </div> 
                 </div> 
@@ -147,56 +147,72 @@ if (isset($_SESSION['loggedin'])){
                     <div class="item popular-item">
                         <div class="thumb">
                             <div class="thumb-img">
-                                <img src="img/team-image-1-646x680.jpg" alt="">
+                                <img src="img/carlao.png" alt="">
                             </div>
                             <div class="text-content">
-                                <h4>John Doe</h4>
-                                <span>CEO</span>
+                                <h4>Carlos Degasperi</h4>
+                                <span>Data Engineer</span>
                             </div>
                             <div class="plus-button">
-                                <a href="team.php"><i class="fa fa-plus"></i></a>
+                                <a href="https://github.com/CarlosDegasperi"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item popular-item">
+                        <div class="thumb">
+                            <div class="thumb-img">
+                                <img src="img/guilherme.png" alt="">
+                            </div>
+                            <div class="text-content">
+                                <h4>Guilherme Afonso</h4>
+                                <span>Sênior back-end</span>
+                            </div>
+                            <div class="plus-button">
+                                <a href="https://github.com/ParaQueNome"><i class="fa fa-plus"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="item popular-item">
+                        <div class="thumb">
+                            <div class="thumb-img">
+                                <img src="img/matheus.png" alt="">
+                            </div>
+                            <div class="text-content">
+                                <h4>Matheus Matias</h4>
+                                <span>Project Manager/Front End</span>
+                            </div>
+                            <div class="plus-button">
+                                <a href="https://github.com/matheusoms"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="item popular-item">
                         <div class="thumb">
                             <div class="thumb-img">
-                                <img src="img/team-image-2-646x680.jpg" alt="">
+                                <img src="img/vini.png" alt="">
                             </div>
                             <div class="text-content">
-                                <h4>Jane Doe</h4>
-                                <span>Marketing Manager</span>
+                                <h4>Vinicius Nigra</h4>
+                                <span>Pleno Back end</span>
                             </div>
                             <div class="plus-button">
-                                <a href="team.php"><i class="fa fa-plus"></i></a>
+                                <a href="https://github.com/vininigra"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="item popular-item">
                         <div class="thumb">
                             <div class="thumb-img">
-                                <img src="img/team-image-3-646x680.jpg" alt="">
+                                <img src="img/vitor.png" alt="">
                             </div>
                             <div class="text-content">
-                                <h4>Paula Jeorge</h4>
-                                <span>Customer Service</span>
+                                <h4>Vitor Carvalho</h4>
+                                <span>Diagrams</span>
                             </div>
                             <div class="plus-button">
-                                <a href="team.php"><i class="fa fa-plus"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item popular-item">
-                        <div class="thumb">
-                            <div class="thumb-img">
-                                <img src="img/team-image-4-646x680.jpg" alt="">
-                            </div>
-                            <div class="text-content">
-                                <h4>Dan Blatan</h4>
-                                <span>Customer Service</span>
-                            </div>
-                            <div class="plus-button">
-                                <a href="team.php"><i class="fa fa-plus"></i></a>
+                                <a href="https://github.com/devvhitor"><i class="fa fa-plus"></i></a>
                             </div>
                         </div>
                     </div>
