@@ -117,6 +117,22 @@ class Evento{
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
     }
+    private function verificarInscricao($evento_id, $usuario_id) {
+        // Realize a lógica de verificação aqui
+        // Por exemplo, consulte o banco de dados para verificar se há uma inscrição correspondente
+    
+        // Supondo que você tenha uma tabela "inscricoes" com colunas "evento_id" e "usuario_id"
+        $query = "SELECT * FROM inscricoes WHERE evento_id = '$evento_id' AND usuario_id = '$usuario_id'";
+        $result = $this->connect->getConnection()->query($query);
+    
+        if ($result && $result->num_rows > 0) {
+            // O usuário está inscrito
+            return true;
+        } else {
+            // O usuário não está inscrito
+            return false;
+        }
+    }
     public function listaEventoP(){
 
         // Verifique se há resultados
@@ -151,6 +167,7 @@ if ($result && $result->num_rows > 0) {
                     <div class="down-content">
                         <h4>'.$esporte.'</h4>
                         <p>'.$local.'</p>
+                        
                         <div class="text-button">
                             <a href="cadastro.php?id='.$id.'">Inscrever-se</a>
                         </div>
