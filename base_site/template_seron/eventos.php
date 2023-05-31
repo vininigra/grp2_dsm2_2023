@@ -122,9 +122,6 @@ if (isset($_SESSION['loggedin'])){
                         </div>
 
                         <p><a href="#">Evento de vôlei</a></p>
-                        <!-- <p><a href="#">Non, magni, sequi. Explicabo illum quas debitis ut hic possimus, nesciunt mag!</a></p>
-                        <p><a href="#">Vatae expedita deleniti optio ex adipisci animi, iusto tempora. </a></p>
-                        <p><a href="#">Soluta non modi dolorem voluptates. Maiores est, molestiae dolor laborum.</a></p> -->
                     </div>
                 </div>
             </div>
