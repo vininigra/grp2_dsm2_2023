@@ -101,59 +101,6 @@ if (isset($_SESSION['loggedin'])){
                         require_once('Classes/Evento.php');
                         $evento = new Evento(); 
                         $evento->listaEventoP(); ?>
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="featured-item">
-                                    <div class="thumb">
-                                        <div class="thumb-img">
-                                            <img src="img/volei.jpg" alt="">
-                                        </div>
-
-                                        <div class="overlay-content">
-                                        <strong title="Author"><i class="fa fa-user"></i> FHO</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <strong title="Posted on"><i class="fa fa-calendar"></i> 12/06/2020 10:30</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <!-- <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> -->
-                                        </div>
-                                    </div>
-
-                                    <div class="down-content">
-                                        <h4>Oficina de Vôlei</h4>
-
-                                        <p>Se inscreva na oficina de volei ministrada pelo instrutor José Silva.</p>
-
-                                        <div class="text-button">
-                                            <a href="cadastro.php">Inscrever-se</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-6 col-xs-12">
-                                <div class="featured-item">
-                                    <div class="thumb">
-                                        <div class="thumb-img">
-                                            <img src="img/basquete.jpg" alt="">
-                                        </div>
-
-                                        <div class="overlay-content">
-                                        <strong title="Author"><i class="fa fa-user"></i> FHO</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <strong title="Posted on"><i class="fa fa-calendar"></i> 12/06/2020 10:30</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <!-- <strong title="Views"><i class="fa fa-map-marker"></i> 115</strong> -->
-                                        </div>
-                                    </div>
-
-                                        <div class="down-content">
-                                            <h4>Oficina de Basquete</h4>
-
-                                            <p>Se inscreva na oficina de basquete ministrada pelo instrutor Marcos Filho.</p>
-
-                                            <div class="text-button">
-                                                <a href="cadastro.php">Inscrever-se</a>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                     <div class="col-lg-3 col-md-4 col-xs-12">
                         <div class="form-group">
