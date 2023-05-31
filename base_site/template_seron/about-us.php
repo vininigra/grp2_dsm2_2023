@@ -98,8 +98,8 @@ if (isset($_SESSION['loggedin'])){
                     <div class="col-md-9">
                         <div class="left-content">
                             <br>
-                            <h4>Um pouco sobre a equipe</h4>
-                            <p>O grupo Seron é uma equipe altamente qualificada e apaixonada por desenvolvimento de software web, focada em criar soluções inovadoras para promover a saúde e o bem-estar. Composto por cinco profissionais especializados, o grupo reúne talentos diversos e complementares, combinando habilidades técnicas, conhecimento em saúde e uma visão empreendedora.</p>
+                            <h2>Um pouco sobre a equipe</h2>
+                            <h4>O grupo Seron é uma equipe altamente qualificada e apaixonada por desenvolvimento de software web, focada em criar soluções inovadoras para promover a saúde e o bem-estar. Composto por cinco profissionais especializados, o grupo reúne talentos diversos e complementares, combinando habilidades técnicas, conhecimento em saúde e uma visão empreendedora.</h4>
                         </div>
                     </div>
                     <div class="col-md-3">
