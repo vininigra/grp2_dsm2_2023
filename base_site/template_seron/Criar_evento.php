@@ -14,7 +14,7 @@
     
     
     if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-        if (isset($_POST['editar'])) {
+        if (isset($_POST['cadastrar'])) {
             // Criando variáveis para receber as informações do formulário
             $data = $_POST['data'];
             $hora = $_POST['hora'];

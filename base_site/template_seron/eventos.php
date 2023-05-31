@@ -97,6 +97,10 @@ if (isset($_SESSION['loggedin'])){
                         <div class="row">
 
                         <!-- inicio do row -->
+                        <?php
+                        require_once('Classes/Evento.php');
+                        $evento = new Evento(); 
+                        $evento->listaEventoP(); ?>
                             <div class="col-sm-6 col-xs-12">
                                 <div class="featured-item">
                                     <div class="thumb">

@@ -39,7 +39,7 @@ class Evento{
             }
             
             
-            $sql = "INSERT INTO Evento (                   
+            $sql = "INSERT INTO evento (                   
                   data,hora,local,tipo_esporte,faixa_etaria, fk_colaborador_id)
                   VALUES (
                     '$data','$hora','$local','$tipo_esporte','$faixa_etaria','$sessao_id')";
@@ -116,6 +116,52 @@ class Evento{
 
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
+    }
+    public function listaEventoP(){
+
+        // Verifique se há resultados
+    $query = "CALL SP_LISTAREVENTOS";
+    $result = $this->connect->getConnection()->query($query);
+    
+if ($result && $result->num_rows > 0) {
+    // Percorra os resultados e exiba os eventos
+
+    while ($row = $result->fetch_assoc()) {
+        // Extrai os valores das colunas
+        $id = $row['id'];
+        $data = $row['data'];
+        $hora = $row['hora'];
+        $local = $row['local'];
+        $esporte = $row['Esporte']; // Certifique-se de que a coluna é 'Esporte' em maiúsculas
+        $faixaEtaria = $row['faixa_etaria'];
+
+        // Exiba os eventos com a estilização desejada
+        echo '
+            <div class="col-sm-6 col-xs-12">
+                <div class="featured-item">
+                    <div class="thumb">
+                        <div class="thumb-img">
+                            <img src="img/volei.jpg" alt="">
+                        </div>
+                        <div class="overlay-content">
+                            <strong title="Author"><i class="fa fa-user"></i>'.$local. '</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <strong title="Posted on"><i class="fa fa-calendar"></i> '.$data.' '.$hora.'</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </div>
+                    <div class="down-content">
+                        <h4>'.$esporte.'</h4>
+                        <p>'.$local.'</p>
+                        <div class="text-button">
+                            <a href="cadastro.php?id='.$id.'">Inscrever-se</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+    }
+} else {
+    echo "Nenhum evento encontrado.";
+}
     }
     
     public function read($sessao_id) {
