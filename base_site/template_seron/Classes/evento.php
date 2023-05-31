@@ -147,42 +147,55 @@ class Evento{
         header("Location: lista_evento.php");
     }
 
-    public function update(Evento $evento) {
-        try {
-            $conexao = $this->connect->getConnection();
-            $sql = "UPDATE evento SET
-                    data = ?,
-                    hora = ?,
-                    local = ?,
-                    tipo_esporte = ?,
-                    faixa_etaria = ?
-                    WHERE id = ?";
-                  
-            $stmt = $conexao->prepare($sql);
-            $stmt->bind_param("sssssi", $evento->getData(), $evento->getHora(), $evento->getLocal(), $evento->getTipo_esporte(), $evento->getFaixa_etaria(), $evento->getId());
-            $stmt->execute();
-            
-        } catch (Exception $e) {
-            echo "Ocorreu um erro ao tentar fazer Update: " . $e->getMessage();
+    public function update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
+        $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
+        $result = $this->connect->getConnection()->query($sql);
+        
+        if($result->num_rows > 0){
+            $data = "UPDATE evento SET data = '$data' WHERE id = '$sessao_id'";
+            $hora = "UPDATE evento SET hora = '$hora' WHERE id = '$sessao_id'";
+            $local = "UPDATE evento SET local = '$local' WHERE id = '$sessao_id'";
+            $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE id = '$sessao_id'";
+            $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE id = '$sessao_id'";
+            if($this->connect->getConnection()->query($data)=== TRUE){
+                echo "Dados inseridos";
+                }
+            if($this->connect->getConnection()->query($hora)=== TRUE){
+                echo "Dados inseridos";
+                }
+            if($this->connect->getConnection()->query($local)=== TRUE){
+                echo "Dados inseridos";
+                }
+            if($this->connect->getConnection()->query($tipo_esporte)=== TRUE){
+                echo "Dados inseridos";
+                }
+            if($this->connect->getConnection()->query($faixa_etaria)=== TRUE){
+                echo "Dados inseridos";
+                }
+        
+            }else{
+                echo "Evento não cadastrado!!";
+            }
+    }
+    public function delete($evento, $sessao_id){
+        $sql = "SELECT id FROM evento WHERE fk_colaborador_id = $sessao_id";
+
+ 
+
+        $result = $this->connect->getConnection()->query($sql);
+
+ 
+
+        if($result->num_rows > 0){
+            $delete = "DELETE FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
+            if($this->connect->getConnection()->query($delete) === TRUE){
+                echo "Dados Deletados com Sucesso";
+                
+            }else
+            echo "evento nao Encontrado!";
         }
-        header('Location: lista_evento.php');
-        exit();
     }
 
-    public function delete($eventoId) {
-        try {
-            $conexao = $this->connect->getConnection();
-            $sql = "DELETE FROM evento WHERE id = ?";
-            $stmt = $conexao->prepare($sql);
-            $stmt->bind_param("i", $eventoId);
-            $stmt->execute();
-            
-        } catch (Exception $e) {
-            echo "Erro ao Excluir Evento: " . $e->getMessage();
-        }
-        header("Location: ../../");
-        exit();
-    }
     
     function __destruct(){
         $this->connect->closeConnection();
