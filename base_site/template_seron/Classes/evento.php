@@ -137,32 +137,36 @@ class Evento{
         // Verifique se há resultados
         $query = "SELECT fk_evento_id, fk_colaborador_id FROM inscricao_colaborador WHERE fk_evento_id = '$idevento' AND fk_colaborador_id = '$idcolaborador'";
         $result = $this->connect->getConnection()->query($query);
-        if(!empty($result) && $result->num_rows > 0){
-            return TRUE;
-
-    }else{
-        return FALSE;
+        if ($result) {
+            return $result;
+        } else {
+            echo "Erro ao executar a query: " . $query . "<br>" . $this->connect->getConnection()->error;
+            return false;
         }
     }
+   
     private function selectEvento(){
         // Verifique se há resultados
         $query = "CALL SP_LISTAREVENTOS";
         $result = $this->connect->getConnection()->query($query);
+        
         return $result;
     }
     public function listaEvento($colaborador,$sessao_id){
     // Chamada do metodo que faz a select do evento dentro do banco de dados
     $result = $this->selectEvento();
     if ($result && $result->num_rows > 0) {
+        $rows = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
     // Percorra os resultados e exiba os eventos
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($rows as $row) {
             // Extrai os valores das colunas
             $id = $row['id'];
             $data = $row['data'];
             $hora = $row['hora'];
             $local = $row['local'];
-            $esporte = $row['Esporte']; // Certifique-se de que a coluna é 'Esporte' em maiúsculas
+            $esporte = $row['Esporte'];
             $faixaEtaria = $row['faixa_etaria'];
 
             // Exiba os eventos com a estilização desejada
@@ -182,7 +186,8 @@ class Evento{
                             <h4>'.$esporte.'</h4>
                             <p>'.$local.'</p>';
                             if($colaborador || $colaborador == TRUE){
-                                if($this->selectEventoC($sessao_id,$id) == TRUE){
+                                $resultInscricao = $this->verificarInscricaoP($id,$sessao_id);
+                                if($resultInscricao && $resultInscricao->num_rows > 0){
                                     echo '<div class="text-button">
                                         <a>Inscrito</a>
                                     </div>';
@@ -192,6 +197,7 @@ class Evento{
                                         </div>';
                                 }
                                 
+                                
                             }else if(!$colaborador || $colaborador == FALSE){
 
                             }
@@ -200,6 +206,7 @@ class Evento{
                     </div>
                 </div>
             ';
+            
         }
     } else {
         echo "Nenhum evento encontrado.";
