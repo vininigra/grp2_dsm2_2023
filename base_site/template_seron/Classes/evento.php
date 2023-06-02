@@ -117,7 +117,7 @@ class Evento{
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
     }
-    private function verificarInscricao($evento_id, $usuario_id) {
+    private function verificarInscricaoP($evento_id, $usuario_id) {
         // Realize a lógica de verificação aqui
         // Por exemplo, consulte o banco de dados para verificar se há uma inscrição correspondente
     
