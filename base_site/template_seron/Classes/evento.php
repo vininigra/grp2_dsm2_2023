@@ -133,52 +133,77 @@ class Evento{
             return false;
         }
     }
-    public function listaEventoP(){
-
+    private function selectEventoC($idcolaborador,$idevento){
         // Verifique se há resultados
-    $query = "CALL SP_LISTAREVENTOS";
-    $result = $this->connect->getConnection()->query($query);
-    
-if ($result && $result->num_rows > 0) {
+        $query = "SELECT fk_evento_id, fk_colaborador_id FROM inscricao_colaborador WHERE fk_evento_id = '$idevento' AND fk_colaborador_id = '$idcolaborador'";
+        $result = $this->connect->getConnection()->query($query);
+        if(!empty($result) && $result->num_rows > 0){
+            return TRUE;
+
+    }else{
+        return FALSE;
+        }
+    }
+    private function selectEvento(){
+        // Verifique se há resultados
+        $query = "CALL SP_LISTAREVENTOS";
+        $result = $this->connect->getConnection()->query($query);
+        return $result;
+    }
+    public function listaEvento($colaborador,$sessao_id){
+    // Chamada do metodo que faz a select do evento dentro do banco de dados
+    $result = $this->selectEvento();
+    if ($result && $result->num_rows > 0) {
     // Percorra os resultados e exiba os eventos
 
-    while ($row = $result->fetch_assoc()) {
-        // Extrai os valores das colunas
-        $id = $row['id'];
-        $data = $row['data'];
-        $hora = $row['hora'];
-        $local = $row['local'];
-        $esporte = $row['Esporte']; // Certifique-se de que a coluna é 'Esporte' em maiúsculas
-        $faixaEtaria = $row['faixa_etaria'];
+        while ($row = $result->fetch_assoc()) {
+            // Extrai os valores das colunas
+            $id = $row['id'];
+            $data = $row['data'];
+            $hora = $row['hora'];
+            $local = $row['local'];
+            $esporte = $row['Esporte']; // Certifique-se de que a coluna é 'Esporte' em maiúsculas
+            $faixaEtaria = $row['faixa_etaria'];
 
-        // Exiba os eventos com a estilização desejada
-        echo '
-            <div class="col-sm-6 col-xs-12">
-                <div class="featured-item">
-                    <div class="thumb">
-                        <div class="thumb-img">
-                            <img src="img/volei.jpg" alt="">
+            // Exiba os eventos com a estilização desejada
+            echo '
+                <div class="col-sm-6 col-xs-12">
+                    <div class="featured-item">
+                        <div class="thumb">
+                            <div class="thumb-img">
+                                <img src="img/volei.jpg" alt="">
+                            </div>
+                            <div class="overlay-content">
+                                <strong title="Author"><i class="fa fa-user"></i>'.$local. '</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <strong title="Posted on"><i class="fa fa-calendar"></i> '.$data.' '.$hora.'</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
                         </div>
-                        <div class="overlay-content">
-                            <strong title="Author"><i class="fa fa-user"></i>'.$local. '</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                            <strong title="Posted on"><i class="fa fa-calendar"></i> '.$data.' '.$hora.'</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                        </div>
-                    </div>
-                    <div class="down-content">
-                        <h4>'.$esporte.'</h4>
-                        <p>'.$local.'</p>
-                        
-                        <div class="text-button">
-                            <a href="cadastro.php?id='.$id.'">Inscrever-se</a>
+                        <div class="down-content">
+                            <h4>'.$esporte.'</h4>
+                            <p>'.$local.'</p>';
+                            if($colaborador || $colaborador == TRUE){
+                                if($this->selectEventoC($sessao_id,$id) == TRUE){
+                                    echo '<div class="text-button">
+                                        <a>Inscrito</a>
+                                    </div>';
+                                }else{
+                                    echo '<div class="text-button">
+                                        <a href="inscricao_colaborador.php?id='.$id.'">Inscrever-se</a>
+                                        </div>';
+                                }
+                                
+                            }else if(!$colaborador || $colaborador == FALSE){
+
+                            }
+                            echo '
                         </div>
                     </div>
                 </div>
-            </div>
-        ';
+            ';
+        }
+    } else {
+        echo "Nenhum evento encontrado.";
     }
-} else {
-    echo "Nenhum evento encontrado.";
-}
     }
     
     public function read($sessao_id) {

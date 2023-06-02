@@ -5,8 +5,11 @@ session_start();
 if (isset($_SESSION['loggedin'])){
     $status = "Logado";
     $colaborador = $_SESSION['colaborador'];
+    $session_id =$_SESSION['id'];
 } else {
     $status = "Cadastre-se";
+    header('Location: login.php');
+    
     
 }
 
@@ -100,7 +103,7 @@ if (isset($_SESSION['loggedin'])){
                         <?php
                         require_once('Classes/Evento.php');
                         $evento = new Evento(); 
-                        $evento->listaEventoP();
+                        $evento->listaEvento($colaborador,$session_id);
                         unset($evento); ?>
 
                     <div class="col-lg-3 col-md-4 col-xs-12">
