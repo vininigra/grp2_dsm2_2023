@@ -96,17 +96,7 @@ if (isset($_SESSION['loggedin'])){
         <section class="featured-places">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9 col-md-8 col-xs-12">
-                        <div class="row">
-
-                        <!-- inicio do row -->
-                        <?php
-                        require_once('Classes/Evento.php');
-                        $evento = new Evento(); 
-                        $evento->listaEvento($colaborador,$session_id);
-                        unset($evento); ?>
-
-                    <div class="col-lg-3 col-md-4 col-xs-12">
+                <div class="col-lg-3 col-md-4 col-xs-12">
                         <div class="form-group">
                             <h4>Consulta de eventos</h4>
                         </div>
@@ -127,6 +117,17 @@ if (isset($_SESSION['loggedin'])){
 
                         <p><a href="#">Evento de vôlei</a></p>
                     </div>
+                    <div class="col-lg-9 col-md-8 col-xs-12">
+                        <div class="row">
+
+                        <!-- inicio do row -->
+                        <?php
+                        require_once('Classes/Evento.php');
+                        $evento = new Evento(); 
+                        $evento->listaEvento($colaborador,$session_id);
+                        unset($evento); ?>
+                        </div>
+                   
                 </div>
             </div>
         </section>
