@@ -167,7 +167,7 @@ class Evento{
     
             // Percorra os resultados e exiba os eventos
             foreach ($rows as $row) {
-                // Extrai os valores das colunas
+                // Extraindo os valores das colunas
                 $id = $row['id'];
                 $data = $row['data'];
                 $hora = $row['hora'];
@@ -175,7 +175,7 @@ class Evento{
                 $esporte = $row['Esporte'];
                 $faixaEtaria = $row['faixa_etaria'];
     
-                // Exiba os eventos com a estilização desejada
+                // Exibindo os eventos com a estilização desejada
                 echo '
                     <div class="col-sm-6 col-xs-12">
                         <div class="featured-item">
@@ -193,7 +193,7 @@ class Evento{
                                 <p>'.$local.'</p>';
     
                 if ($colaborador) {
-                    // Verifique a inscrição do colaborador
+                    // Verificando a inscrição do colaborador
                     
                     $inscricaoResult = $this->selectEventoC($sessao_id,$id);
                     if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
@@ -207,6 +207,7 @@ class Evento{
                               
                     }
                 }else{
+                    // Verificando a inscrição do participante
                     $inscricaoResult = $this->selectEventoP($sessao_id,$id);
                     if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
                         echo '<div class="text-button">
@@ -214,7 +215,7 @@ class Evento{
                                 </div>';
                     }else{
                         echo '<div class="text-button">
-                                <a href="inscricao_colaborador.php?id='.$id.'">Inscrever-se</a>
+                                <a href="inscricao_participante.php?id='.$id.'">Inscrever-se</a>
                               </div>';
                     }
                 }
@@ -261,48 +262,88 @@ class Evento{
         return $evento;
         header("Location: lista_evento.php");
     }
+    public function inscricaoPartipante($sessao_id,$id_evento){
+        $query = "INSERT INTO inscricao_participante(fk_evento_id,fk_participante_id) VALUES (?,?)";
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->bind_param("ii",$id_evento,$sessao_id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            echo "Inscricao realizada.";
+        } else {
+            echo "Erro ao se inscrever.";
+        }
+        $stmt->close();
+    }
+    public function inscricaoColaborador($sessao_id,$id_evento){
+        $query = "INSERT INTO inscricao_colaborador(fk_evento_id,fk_colaborador_id) VALUES (?,?)";
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->bind_param("ii",$id_evento,$sessao_id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+            echo "Inscricao realizada.";
+        } else {
+            echo "Erro ao se inscrever.";
+            }
+    }
+    private function updateData($data,$sessao_id){
+        $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($data)=== TRUE){
+            echo "Dados inseridos";
+            }
+    }
+    private function updateHora($hora,$sessao_id){
+        $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($hora)=== TRUE){
+            echo "Dados inseridos";
+
+        }
+    }
+    private function updateLocal($local,$sessao_id){
+        $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($local)=== TRUE){
+            echo "Dados inseridos";
+        
+        }
+    }
+    private function updateTipoEsporte($tipo_esporte,$sessao_id){
+        $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($tipo_esporte)=== TRUE){
+            echo "Dados inseridos";
+        }
+    }
+    private function updateFaixaEtaria($faixa_etaria,$sessao_id){
+        $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($faixa_etaria)=== TRUE){
+            echo "Dados inseridos";
+        }
+    }
 
     public function update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
-        $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
-        $result = $this->connect->getConnection()->query($sql);
+        $result = $this->selectEventoCriado($sessao_id);
         
         if($result->num_rows > 0){
-            $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id'";
-            $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'";
-            $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'";
-            $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'";
-            $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'";
-            if($this->connect->getConnection()->query($data)=== TRUE){
-                echo "Dados inseridos";
-                }
-            if($this->connect->getConnection()->query($hora)=== TRUE){
-                echo "Dados inseridos";
-                }
-            if($this->connect->getConnection()->query($local)=== TRUE){
-                echo "Dados inseridos";
-                }
-            if($this->connect->getConnection()->query($tipo_esporte)=== TRUE){
-                echo "Dados inseridos";
-                }
-            if($this->connect->getConnection()->query($faixa_etaria)=== TRUE){
-                echo "Dados inseridos";
-                }
-        
-            }else{
+            $data = $this->updateData($data, $sessao_id);   
+            $hora = $this->updateHora($hora, $sessao_id);
+            $local = $this->updateLocal($local, $sessao_id);
+            $tipo_esporte = $this->updateTipoEsporte($tipo_esporte, $sessao_id);
+            $faixa_etaria = $this->updateFaixaEtaria($faixa_etaria, $sessao_id);
+         }else{
                 echo "Evento não cadastrado!!";
             }
     }
+    private function deleteEvento($evento, $sessao_id){
+        $delete = "DELETE FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
+        if($this->connect->getConnection()->query($delete)=== TRUE){
+            echo "Evento deletado com sucesso";
+        } else {
+            echo "Erro ao deletar evento: " . $this->connect->getConnection()->error;
+        }    
+    }
     public function delete($evento, $sessao_id) {
-        $sql = "SELECT id FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
-        $result = $this->connect->getConnection()->query($sql);
+        $result = $this->selectEventoCriado($sessao_id);
     
         if ($result->num_rows > 0) {
-            $delete = "DELETE FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
-            if ($this->connect->getConnection()->query($delete) === TRUE) {
-                echo "Evento deletado com sucesso";
-            } else {
-                echo "Erro ao deletar evento: " . $this->connect->getConnection()->error;
-            }
+            $delete = $this->deleteEvento($evento, $sessao_id);
         } else {
             echo "Evento não encontrado";
         }

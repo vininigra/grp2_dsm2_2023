@@ -1,5 +1,5 @@
 <?php
-include('session1.php');
+include('session.php');
 
 require_once("Classes/evento.php");
 // Verifica se o ID do evento foi fornecido

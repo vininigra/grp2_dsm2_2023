@@ -79,6 +79,9 @@
                     <button class="btn btn-primary" type="submit" name="cadastrar">Cadastrar</button>
                     <br>
                     <a class="btn btn-primary" href="lista_evento.php">Listar</a>
+                    <br>
+                    <a class="btn btn-primary" href="index.php">Voltar</a>
+                    
                 </div>
             </div>
         </form>
