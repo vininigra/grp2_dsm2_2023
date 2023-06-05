@@ -35,11 +35,15 @@ class Evento{
             $sessao_id = $this->sanitizeInput($this->sessao_id);
             
             // Validação de Dados
-            if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
-                throw new Exception("Todos os campos devem ser preenchidos.");
-            }
+           $this->validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria);
             
-            $sql = "INSERT INTO evento (data, hora, local, tipo_esporte, faixa_etaria, fk_colaborador_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $smt = $this->insertEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+        } catch (Exception $e) {
+            echo "Erro ao inserir evento: " . $e->getMessage();
+        }
+    }
+    private function insertEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
+        $sql = "INSERT INTO evento (data, hora, local, tipo_esporte, faixa_etaria, fk_colaborador_id) VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->connect->getConnection()->prepare($sql);
             $stmt->bind_param("sssssi", $data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
             $stmt->execute();
@@ -51,15 +55,15 @@ class Evento{
             }
             
             $stmt->close();
-        } catch (Exception $e) {
-            echo "Erro ao inserir evento: " . $e->getMessage();
-        }
     }
-
 
     //Metodo que realiza a validacao dos dados
     private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
-
+         // Validação de Dados
+         if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
+            throw new Exception("Todos os campos devem ser preenchidos.");
+            exit;
+        }
     }
     // Metodo que realize a Sanitizacao dos dados
     private function sanitizeInput($input) {
