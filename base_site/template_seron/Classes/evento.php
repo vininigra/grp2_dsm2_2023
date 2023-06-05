@@ -263,11 +263,11 @@ class Evento{
         $result = $this->connect->getConnection()->query($sql);
         
         if($result->num_rows > 0){
-            $data = "UPDATE evento SET data = '$data' WHERE id = '$sessao_id'";
-            $hora = "UPDATE evento SET hora = '$hora' WHERE id = '$sessao_id'";
-            $local = "UPDATE evento SET local = '$local' WHERE id = '$sessao_id'";
-            $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE id = '$sessao_id'";
-            $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE id = '$sessao_id'";
+            $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id'";
+            $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'";
+            $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'";
+            $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'";
+            $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'";
             if($this->connect->getConnection()->query($data)=== TRUE){
                 echo "Dados inseridos";
                 }

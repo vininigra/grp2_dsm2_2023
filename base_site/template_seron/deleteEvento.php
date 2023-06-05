@@ -1,12 +1,5 @@
 <?php
-session_start();
-// Verifica se a sessão está iniciada
-if (isset($_SESSION['loggedin'])) {
-    $status = "Logado";
-    $sessao_id = $_SESSION['id'];
-} else {
-    header('location: index.php');
-}
+include('session1.php');
 
 require_once("Classes/evento.php");
 // Verifica se o ID do evento foi fornecido

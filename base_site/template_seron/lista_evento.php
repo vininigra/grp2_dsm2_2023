@@ -1,12 +1,5 @@
 <?php
-session_start();
-// Verifica se a sessão está iniciada
-if (isset($_SESSION['loggedin'])) {
-    $status = "Logado";
-    $sessao_id = $_SESSION['id'];
-} else {
-    header('location: index.php');
-}
+include('session.php');
 include_once "Classes/evento.php";
 
 // Instancia a classe Evento
@@ -104,7 +97,7 @@ $evento = new Evento();
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form action="Classes/evento.php" method="POST">
+                                        <form action="updateEvento.php" method="POST">
                                             <div class="row">
                                                 <div class="col-md-5">
                                                     <label>Data</label>
