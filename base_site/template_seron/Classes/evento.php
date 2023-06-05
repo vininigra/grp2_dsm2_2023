@@ -33,24 +33,26 @@ class Evento{
             $tipo_esporte = $this->sanitizeInput($this->tipo_esporte);
             $faixa_etaria = $this->sanitizeInput($this->faixa_etaria);
             $sessao_id = $this->sanitizeInput($this->sessao_id);
+            
             // Validação de Dados
             if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
                 throw new Exception("Todos os campos devem ser preenchidos.");
             }
             
+            $sql = "INSERT INTO evento (data, hora, local, tipo_esporte, faixa_etaria, fk_colaborador_id) VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connect->getConnection()->prepare($sql);
+            $stmt->bind_param("sssssi", $data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+            $stmt->execute();
             
-            $sql = "INSERT INTO evento (                   
-                  data,hora,local,tipo_esporte,faixa_etaria, fk_colaborador_id)
-                  VALUES (
-                    '$data','$hora','$local','$tipo_esporte','$faixa_etaria','$sessao_id')";
-
-            $this->connect->getConnection()->query($sql);
-
-           
+            if ($stmt->affected_rows > 0) {
+                echo "Evento criado com sucesso.";
+            } else {
+                echo "Erro ao criar o evento.";
+            }
             
-            
+            $stmt->close();
         } catch (Exception $e) {
-            print "Erro ao Inserir Evento <br>" . $e . '<br>';
+            echo "Erro ao inserir evento: " . $e->getMessage();
         }
     }
 
@@ -117,19 +119,14 @@ class Evento{
     function setFaixa_etaria($faixa_etaria) {
         $this->faixa_etaria = $faixa_etaria;
     }
-    private function verificarInscricaoP($evento_id, $usuario_id) {
-        // Realize a lógica de verificação aqui
-        // Por exemplo, consulte o banco de dados para verificar se há uma inscrição correspondente
-    
-        // Supondo que você tenha uma tabela "inscricoes" com colunas "evento_id" e "usuario_id"
-        $query = "SELECT * FROM inscricoes WHERE evento_id = '$evento_id' AND usuario_id = '$usuario_id'";
+    private function selectEventoP($idparticipante,$idevento){   
+        // Verifique se há resultados
+        $query = "SELECT fk_evento_id, fk_participante_id FROM inscricao_participante WHERE fk_evento_id = '$idevento' AND fk_participante_id = '$idparticipante'";
         $result = $this->connect->getConnection()->query($query);
-    
-        if ($result && $result->num_rows > 0) {
-            // O usuário está inscrito
-            return true;
+        if ($result) {
+            return $result;
         } else {
-            // O usuário não está inscrito
+            echo "Erro ao executar a query: " . $query . "<br>" . $this->connect->getConnection()->error;
             return false;
         }
     }
@@ -144,73 +141,88 @@ class Evento{
             return false;
         }
     }
+    
    
     private function selectEvento(){
-        // Verifique se há resultados
         $query = "CALL SP_LISTAREVENTOS";
-        $result = $this->connect->getConnection()->query($query);
-        
-        return $result;
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        if ($result && $result->num_rows > 0) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+            return $rows;
+        }
     }
-    public function listaEvento($colaborador,$sessao_id){
-    // Chamada do metodo que faz a select do evento dentro do banco de dados
-    $result = $this->selectEvento();
-    if ($result && $result->num_rows > 0) {
-        $rows = $result->fetch_all(MYSQLI_ASSOC);
-        $result->free();
-    // Percorra os resultados e exiba os eventos
-
-        foreach ($rows as $row) {
-            // Extrai os valores das colunas
-            $id = $row['id'];
-            $data = $row['data'];
-            $hora = $row['hora'];
-            $local = $row['local'];
-            $esporte = $row['Esporte'];
-            $faixaEtaria = $row['faixa_etaria'];
-
-            // Exiba os eventos com a estilização desejada
-            echo '
-                <div class="col-sm-6 col-xs-12">
-                    <div class="featured-item">
-                        <div class="thumb">
-                            <div class="thumb-img">
-                                <img src="img/volei.jpg" alt="">
+    public function listaEvento($colaborador, $sessao_id) {
+        // Chamada do método que faz a select do evento dentro do banco de dados
+        $rows = $this->selectEvento();
+        if($rows){
+        
+    
+            // Percorra os resultados e exiba os eventos
+            foreach ($rows as $row) {
+                // Extrai os valores das colunas
+                $id = $row['id'];
+                $data = $row['data'];
+                $hora = $row['hora'];
+                $local = $row['local'];
+                $esporte = $row['Esporte'];
+                $faixaEtaria = $row['faixa_etaria'];
+    
+                // Exiba os eventos com a estilização desejada
+                echo '
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="featured-item">
+                            <div class="thumb">
+                                <div class="thumb-img">
+                                    <img src="img/volei.jpg" alt="">
+                                </div>
+                                <div class="overlay-content">
+                                    <strong title="Author"><i class="fa fa-user"></i>'.$local. '</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <strong title="Posted on"><i class="fa fa-calendar"></i> '.$data.' '.$hora.'</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                                </div>
                             </div>
-                            <div class="overlay-content">
-                                <strong title="Author"><i class="fa fa-user"></i>'.$local. '</strong> &nbsp;&nbsp;&nbsp;&nbsp;
-                                <strong title="Posted on"><i class="fa fa-calendar"></i> '.$data.' '.$hora.'</strong> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <div class="down-content">
+                                <h4>'.$esporte.'</h4>
+                                <p>'.$local.'</p>';
+    
+                if ($colaborador) {
+                    // Verifique a inscrição do colaborador
+                    
+                    $inscricaoResult = $this->selectEventoC($sessao_id,$id);
+                    if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
+                        echo '<div class="text-button">
+                                <a>Inscrito</a>
+                              </div>';
+                    } else {
+                        echo '<div class="text-button">
+                                <a href="inscricao_colaborador.php?id='.$id.'">Inscrever-se</a>
+                              </div>';
+                              
+                    }
+                }else{
+                    $inscricaoResult = $this->selectEventoP($sessao_id,$id);
+                    if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
+                        echo '<div class="text-button">
+                                <a>Inscrito</a>
+                                </div>';
+                    }else{
+                        echo '<div class="text-button">
+                                <a href="inscricao_colaborador.php?id='.$id.'">Inscrever-se</a>
+                              </div>';
+                    }
+                }
+                echo '
                             </div>
-                        </div>
-                        <div class="down-content">
-                            <h4>'.$esporte.'</h4>
-                            <p>'.$local.'</p>';
-                            if($colaborador || $colaborador == TRUE){
-                                $resultInscricao = $this->verificarInscricaoP($id,$sessao_id);
-                                if($resultInscricao && $resultInscricao->num_rows > 0){
-                                    echo '<div class="text-button">
-                                        <a>Inscrito</a>
-                                    </div>';
-                                }else{
-                                    echo '<div class="text-button">
-                                        <a href="inscricao_colaborador.php?id='.$id.'">Inscrever-se</a>
-                                        </div>';
-                                }
-                                
-                                
-                            }else if(!$colaborador || $colaborador == FALSE){
-
-                            }
-                            echo '
                         </div>
                     </div>
-                </div>
-            ';
-            
+                ';
+            }
+        } else {
+            echo "Nenhum evento encontrado.";
         }
-    } else {
-        echo "Nenhum evento encontrado.";
-    }
     }
     
     public function read($sessao_id) {
