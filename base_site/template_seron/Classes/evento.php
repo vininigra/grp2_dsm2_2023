@@ -198,7 +198,8 @@ class Evento{
                     $inscricaoResult = $this->selectEventoC($sessao_id,$id);
                     if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
                         echo '<div class="text-button">
-                                <a>Inscrito</a>
+                               
+                                <a href="cancela_inscricaoC.php?id='.$id.'">Cancelar Inscrição</a>
                               </div>';
                     } else {
                         echo '<div class="text-button">
@@ -211,7 +212,7 @@ class Evento{
                     $inscricaoResult = $this->selectEventoP($sessao_id,$id);
                     if ($inscricaoResult && $inscricaoResult->num_rows > 0) {
                         echo '<div class="text-button">
-                                <a>Inscrito</a>
+                                    <a href="cancela_inscricaoP.php?id='.$id.'">Cancelar Inscrição</a>
                                 </div>';
                     }else{
                         echo '<div class="text-button">
@@ -262,6 +263,25 @@ class Evento{
         return $evento;
         header("Location: lista_evento.php");
     }
+    public function cancelaInscricaoParticipante($sessao_id,$id_evento){
+        $query = "DELETE FROM inscricao_participante WHERE fk_evento_id = ? AND fk_participante_id = ?";
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->bind_param("ii",$id_evento,$sessao_id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0){
+            echo "Inscricao cancelada.";
+        }
+
+    }
+    public function cancelaInscricaoColaborador($sessao_id,$id_evento){
+        $query = "DELETE FROM inscricao_colaborador WHERE fk_evento_id = ? AND fk_colaborador_id = ?";
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->bind_param("ii",$id_evento,$sessao_id);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0){
+            echo "Inscricao cancelada.";
+            }
+        }
     public function inscricaoPartipante($sessao_id,$id_evento){
         $query = "INSERT INTO inscricao_participante(fk_evento_id,fk_participante_id) VALUES (?,?)";
         $stmt = $this->connect->getConnection()->prepare($query);
