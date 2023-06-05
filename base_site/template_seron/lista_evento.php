@@ -22,9 +22,9 @@ $evento = new Evento();
         $tipo_esporte = $_POST['tipo_esporte'];
         $faixa_etaria = $_POST['faixa_etaria'];
 
-        // Chama o método createEvento para criar o evento
-        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
-        header('location: lista_evento.php');
+        
+        
+        
     }
 
 
@@ -87,7 +87,7 @@ $evento = new Evento();
                                 <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $eventoItem->getId() ?>">
                                     Editar
                                 </button>
-                                <a href="Classes/evento.php?del=<?= $eventoItem->getId() ?>">
+                                <a href="deleteEvento.php?id=<?= $eventoItem->getId() ?>" >
                                     <button class="btn btn-danger btn-sm" type="button">Excluir</button>
                                 </a>
 

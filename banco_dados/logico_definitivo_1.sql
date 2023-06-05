@@ -59,7 +59,7 @@ DELIMITER $
 CREATE OR REPLACE PROCEDURE SP_LISTAREVENTOS()
 BEGIN
 	SELECT e.id,e.`data`,e.hora,e.`local`,e.tipo_esporte AS Esporte,e.faixa_etaria
-	FROM evento e;
+	FROM evento e INNER JOIN colaborador c ON e.fk_colaborador_id = c.id;
 	
 END $
 DELIMITER ;

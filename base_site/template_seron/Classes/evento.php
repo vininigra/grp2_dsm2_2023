@@ -243,7 +243,7 @@ class Evento{
         } catch (Exception $e) {
             print "Ocorreu um erro ao tentar Buscar Todos." . $e;
         }
-        header("Location: lista_evento.php");
+        
     }
     private function listaEventos($row) {
         $evento = new Evento();
@@ -288,22 +288,19 @@ class Evento{
                 echo "Evento não cadastrado!!";
             }
     }
-    public function delete($evento, $sessao_id){
-        $sql = "SELECT id FROM evento WHERE fk_colaborador_id = $sessao_id";
-
- 
-
+    public function delete($evento, $sessao_id) {
+        $sql = "SELECT id FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
         $result = $this->connect->getConnection()->query($sql);
-
- 
-
-        if($result->num_rows > 0){
+    
+        if ($result->num_rows > 0) {
             $delete = "DELETE FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
-            if($this->connect->getConnection()->query($delete) === TRUE){
-                echo "Dados Deletados com Sucesso";
-                
-            }else
-            echo "evento nao Encontrado!";
+            if ($this->connect->getConnection()->query($delete) === TRUE) {
+                echo "Evento deletado com sucesso";
+            } else {
+                echo "Erro ao deletar evento: " . $this->connect->getConnection()->error;
+            }
+        } else {
+            echo "Evento não encontrado";
         }
     }
 
