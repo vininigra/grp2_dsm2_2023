@@ -228,11 +228,15 @@ class Evento{
             echo "Nenhum evento encontrado.";
         }
     }
-    
+    // Metodo que seleciona os eventos que o colaborador criou
+    private function selectEventoCriado($sessao_id){
+        $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
+        $result = $this->connect->getConnection()->query($sql);
+        return $result;
+    }
     public function read($sessao_id) {
         try {
-            $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
-            $result = $this->connect->getConnection()->query($sql);
+            $result = $this->selectEventoCriado($sessao_id);
             
             $f_lista = array();
             while ($row = $result->fetch_assoc()) {
