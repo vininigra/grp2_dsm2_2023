@@ -116,7 +116,7 @@ include('session1.php');
                         <div class="featured-item">
                             <div class="down-content">
                                 <div class="text-button">
-                                    <a href="login.php">Entrar</a>
+                                    <a href="login2.php">Entrar</a>
                                 </div>
                             </div>
                         </div>
