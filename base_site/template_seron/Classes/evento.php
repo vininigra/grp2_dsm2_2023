@@ -39,7 +39,7 @@ class Evento{
             
             $smt = $this->insertEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
         } catch (Exception $e) {
-            echo "Erro ao inserir evento: " . $e->getMessage();
+            alert('Erro ao cadastrar');
         }
     }
     private function insertEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
@@ -49,9 +49,9 @@ class Evento{
             $stmt->execute();
             
             if ($stmt->affected_rows > 0) {
-                echo "Evento criado com sucesso.";
+                alert('Evento cadastrado com sucesso!');
             } else {
-                echo "Erro ao criar o evento.";
+                alert('Erro ao cadastrar evento');
             }
             
             $stmt->close();
@@ -61,7 +61,8 @@ class Evento{
     private function validaDados($data, $hora, $local, $tipo_esporte, $faixa_etaria){
          // Validação de Dados
          if (empty($data) || empty($hora) || empty($local) || empty($tipo_esporte) || empty($faixa_etaria)) {
-            throw new Exception("Todos os campos devem ser preenchidos.");
+            throw new Exception(alert('Todos os campos devem ser preenchidos.'));
+            
             exit;
         }
     }

@@ -20,12 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         $evento = new Evento();
         $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
 
-        // Exibir uma mensagem de sucesso ou erro após cadastrar o evento
-        if ($evento) {
-            alert('Evento cadastrado com sucesso!');
-        } else {
-            alert('Erro ao cadastrar o evento. Por favor, tente novamente.');
-        }
+        
+        
     }
 }
 
