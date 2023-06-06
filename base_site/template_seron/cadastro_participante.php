@@ -72,17 +72,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
         form input[type="submit"] {
-            background-color: #4caf50;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
+        background-color: #36802d;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        padding: 10px 16px;
+        text-decoration: none;
+        border: 2px solid #36802d;
+        transition: all 0.5s;
         }
         
         form input[type="submit"]:hover {
             background-color: #45a049;
         }
+
     </style>
     <script>
         function showAlert(message) {

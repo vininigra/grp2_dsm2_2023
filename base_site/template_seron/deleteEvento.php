@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
 
     // Instancia o objeto evento
     $evento = new Evento();
-    $evento->delete($id_evento, $sessao_id);
+    $evento->delete($id_evento, $session_id);
     unset($evento);
 
     header('location: lista_evento.php');

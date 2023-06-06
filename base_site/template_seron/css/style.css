@@ -43,7 +43,6 @@ section {
   letter-spacing: 0.5px;
 }
 
-
 .blue-button a {
   display: inline-block;
   background-color: #36802d;
@@ -60,7 +59,6 @@ section {
   background-color: transparent;
   color: #36802d;
 }
-
 
 /* Header Style */
 
@@ -311,9 +309,6 @@ section {
 #primary-nav-button.mobile {
   display: inline-block;
 }
-
-
-
 
 /* Banner Style */
 

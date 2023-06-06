@@ -14,13 +14,7 @@ $evento = new Evento();
         $local = $_POST['local'];
         $tipo_esporte = $_POST['tipo_esporte'];
         $faixa_etaria = $_POST['faixa_etaria'];
-
-        
-        
-        
     }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +62,7 @@ $evento = new Evento();
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($evento->read($sessao_id) as $eventoItem) : ?>
+                    <?php foreach ($evento->read($session_id) as $eventoItem) : ?>
                         <tr>
                             <td><?= $eventoItem->getId() ?></td>
                             <td><?= $eventoItem->getData() ?></td>

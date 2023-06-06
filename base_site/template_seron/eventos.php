@@ -8,9 +8,7 @@ if (isset($_SESSION['loggedin'])){
     $session_id =$_SESSION['id'];
 } else {
     $status = "Cadastre-se";
-    header('Location: login.php');
-    
-    
+    header('Location: login.php');   
 }
 
 ?>
@@ -66,7 +64,7 @@ if (isset($_SESSION['loggedin'])){
                                 <?php
                                    if($status == 'Logado'){
                                     if($colaborador == TRUE) 
-                                        echo '<li> <a href="Criar_evento.php"> Evento </a> </li>';
+                                        echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
                                         echo '<li> <a href="logout.php"> Sair </a> </li>';
                                 }          
                                 ?>

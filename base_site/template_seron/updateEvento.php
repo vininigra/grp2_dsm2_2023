@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Instancia o objeto evento
     $evento = new Evento();
     // Chamada do metodo update
-    $evento->update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id);
+    $evento->update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
     // Fechando conexao com o banco de dados
     unset($evento);
 
