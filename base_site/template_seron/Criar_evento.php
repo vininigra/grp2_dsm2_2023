@@ -18,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
         // Instanciando objeto evento e chamando o método para criar o evento
         $evento = new Evento();
-        $result = $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
+        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
 
         // Exibir uma mensagem de sucesso ou erro após cadastrar o evento
-        if ($result) {
+        if ($evento) {
             alert('Evento cadastrado com sucesso!');
         } else {
             alert('Erro ao cadastrar o evento. Por favor, tente novamente.');

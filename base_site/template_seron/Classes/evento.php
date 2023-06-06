@@ -305,48 +305,52 @@ class Evento{
             echo "Erro ao se inscrever.";
             }
     }
-    private function updateData($data,$sessao_id){
-        $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id'";
+    private function updateData($data,$sessao_id,$id_evento){
+        $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id' AND id = '$id_evento'";
         if($this->connect->getConnection()->query($data)=== TRUE){
             echo "Dados inseridos";
+            return $data;
             }
     }
-    private function updateHora($hora,$sessao_id){
-        $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'";
+    private function updateHora($hora,$sessao_id,$id_evento){
+        $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
         if($this->connect->getConnection()->query($hora)=== TRUE){
             echo "Dados inseridos";
-
+            return $hora;
         }
     }
-    private function updateLocal($local,$sessao_id){
-        $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'";
+    private function updateLocal($local,$sessao_id,$id_evento){
+        $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
         if($this->connect->getConnection()->query($local)=== TRUE){
             echo "Dados inseridos";
+            return $local;
         
         }
     }
-    private function updateTipoEsporte($tipo_esporte,$sessao_id){
-        $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'";
+    private function updateTipoEsporte($tipo_esporte,$sessao_id,$id_evento){
+        $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
         if($this->connect->getConnection()->query($tipo_esporte)=== TRUE){
             echo "Dados inseridos";
+            return $tipo_esporte;
         }
     }
-    private function updateFaixaEtaria($faixa_etaria,$sessao_id){
-        $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'";
+    private function updateFaixaEtaria($faixa_etaria,$sessao_id,$id_evento){
+        $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
         if($this->connect->getConnection()->query($faixa_etaria)=== TRUE){
             echo "Dados inseridos";
+            return $faixa_etaria;
         }
     }
 
-    public function update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id){
+    public function update($data, $hora, $local, $tipo_esporte, $faixa_etaria, $sessao_id,$id_evento){
         $result = $this->selectEventoCriado($sessao_id);
         
         if($result->num_rows > 0){
-            $data = $this->updateData($data, $sessao_id);   
-            $hora = $this->updateHora($hora, $sessao_id);
-            $local = $this->updateLocal($local, $sessao_id);
-            $tipo_esporte = $this->updateTipoEsporte($tipo_esporte, $sessao_id);
-            $faixa_etaria = $this->updateFaixaEtaria($faixa_etaria, $sessao_id);
+            $data = $this->updateData($data, $sessao_id,$id_evento);   
+            $hora = $this->updateHora($hora, $sessao_id,$id_evento);
+            $local = $this->updateLocal($local, $sessao_id,$id_evento);
+            $tipo_esporte = $this->updateTipoEsporte($tipo_esporte, $sessao_id,$id_evento);
+            $faixa_etaria = $this->updateFaixaEtaria($faixa_etaria, $sessao_id,$id_evento);
          }else{
                 echo "Evento não cadastrado!!";
             }

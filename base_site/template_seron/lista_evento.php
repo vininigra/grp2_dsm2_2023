@@ -3,20 +3,7 @@
     include('session.php');
     include_once "Classes/evento.php";
 
-    if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-        if (isset($_POST['cadastrar'])) {
-            // Criando variáveis para receber as informações do formulário
-            $data = $_POST['data'];
-            $hora = $_POST['hora'];
-            $local = $_POST['local'];
-            $tipo_esporte = $_POST['tipo_esporte'];
-            $faixa_etaria = $_POST['faixa_etaria'];
-    
-            // Instanciando objeto evento e chamando o método para criar o evento
-            $evento = new Evento();
-            $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
-        }
-    }
+   
 
     $evento = new Evento();
 
