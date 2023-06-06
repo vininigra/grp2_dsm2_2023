@@ -269,7 +269,7 @@ class Evento{
         $stmt->bind_param("ii",$id_evento,$sessao_id);
         $stmt->execute();
         if ($stmt->affected_rows > 0){
-            echo "Inscricao cancelada.";
+            exit;
         }
 
     }
@@ -279,7 +279,7 @@ class Evento{
         $stmt->bind_param("ii",$id_evento,$sessao_id);
         $stmt->execute();
         if ($stmt->affected_rows > 0){
-            echo "Inscricao cancelada.";
+            exit;
             }
         }
     public function inscricaoPartipante($sessao_id,$id_evento){
