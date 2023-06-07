@@ -96,7 +96,7 @@ include('session1.php');
                             <div class="featured-item">
                                 <div class="down-content">
                                     <div class="text-button">
-                                        <a href="cadastro_participante.php">Inscrever-se como participante</a>
+                                        <a href="cadastro_participante2.php">Inscrever-se como participante</a>
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@ include('session1.php');
                         <div class="featured-item">
                             <div class="down-content">
                                 <div class="text-button">
-                                    <a href="cadastro_colaborador.php">Inscrever-se como colaborador</a>
+                                    <a href="cadastro_colaborador2.php">Inscrever-se como colaborador</a>
                                 </div>
                             </div>
                         </div>

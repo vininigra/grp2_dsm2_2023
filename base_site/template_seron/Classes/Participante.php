@@ -32,11 +32,17 @@ class Participante extends Pessoa {
         // Verificando se o e-mail já está cadastrado
         // Se retornar alguma informacao pelo resultado, o email constará cadastrado
         if($result->num_rows > 0) {
-            echo "Email já cadastrado";
+            echo '<script>
+            alert("Email já cadastrado!");
+            window.location.href = "cadastro_participante2.php";
+            </script>';
         }else{
             $insert = "INSERT INTO participante(nome, email, senha, nasc) VALUES('$nome', '$email', '$senha', '$idade')";
             if($this->connect->getConnection()->query($insert) === TRUE){
-                echo "Dados inseridos com sucesso";
+                echo '<script>
+                alert("Dados inseridos com sucesso!");
+                window.location.href = "login2.php";
+                </script>';
             }else{
                 echo "Error: " . $insert . "<br>" . $this->connect->getConnection()->error;
             }
@@ -90,8 +96,10 @@ class Participante extends Pessoa {
                 $_SESSION['user'] = $row['nome'];
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['colaborador'] = FALSE;
-                echo "Login realizado com sucesso!";
-                header('location:index.php');
+                echo '<script>
+                alert("Login realizado com sucesso!");
+                window.location.href = "index.php";
+                </script>';
             }else{
                 return "Email ou senha incorretos";
                 session_start();
