@@ -55,11 +55,19 @@ CREATE TABLE inscricao_colaborador (
     FOREIGN KEY (fk_colaborador_id) REFERENCES colaborador(id) ON DELETE SET NULL,
     FOREIGN KEY (fk_evento_id) REFERENCES evento(id) ON DELETE SET NULL
 );
+INSERT INTO administrador (nome,senha) VALUES ('admin','admin');
 DELIMITER $
 CREATE OR REPLACE PROCEDURE SP_LISTAREVENTOS()
 BEGIN
 	SELECT e.id,e.`data`,e.hora,e.`local`,e.tipo_esporte AS Esporte,e.faixa_etaria
 	FROM evento e INNER JOIN colaborador c ON e.fk_colaborador_id = c.id;
 	
+END $
+DELIMITER ;
+
+DELIMITER $
+CREATE OR REPLACE PROCEDURE SP_SELECTCOLABORADOR()
+BEGIN  
+    SELECT * FROM colaborador;
 END $
 DELIMITER ;
