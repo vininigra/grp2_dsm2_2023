@@ -7,7 +7,7 @@ include_once "Classes/evento.php";
 
 $admin = new Administrador();
 
-$colunas = $admin->listarColaborador();
+$colunas = $admin->selectColaborador();
 // Verifica se o formulário foi enviado
 
 if (isset($_POST['Editar'])) {

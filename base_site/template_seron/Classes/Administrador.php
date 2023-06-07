@@ -1,5 +1,6 @@
 <?php
 require_once('Pessoa.php');
+require_once('Colaborador.php');
 require_once('Conexao.php');
 
 class Administrador extends Pessoa {
@@ -7,10 +8,10 @@ class Administrador extends Pessoa {
     private $email;
     private $senha;
     private $connect;
-
+    private $colaborador;
     public function __construct(){
         $this->connect = new Conexao();
-
+        $this->colaborador = new Colaborador();
     }
 
     public function setNome($nome){
@@ -46,13 +47,18 @@ class Administrador extends Pessoa {
         $sql = "CALL SP_SELECTCOLABORADOR()";
         $smtm = $this->connect->prepare($sql);
         $smtm->execute();
-        $result = $smtm->fetchAll();
-        $smtm->close();
-        return $result;
+        $result = $stmt->get_result();
+    
+        if ($result && $result->num_rows > 0) {
+            $rows = $result->fetch_all(MYSQLI_ASSOC);
+            $result->free();
+            return $rows;
+        }
     }
 
     function __destruct(){
         $this->connect->closeConnection();
+}
 }
 
 ?>
