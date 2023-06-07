@@ -40,20 +40,41 @@ class Administrador extends Pessoa {
 
     }
     public function selectColaborador(){
-        $this->selectColaboradorProcedure();
+        
+        try {
+            $result = $this->selectColaboradorProcedure();
+            
+            $f_lista = array();
+            while ($row = $result->fetch_assoc()) {
+                $f_lista[] = $this->criaArray($row);
+            }
+            unset($evento);
+            return $f_lista;
+        } catch (Exception $e) {
+            print "Ocorreu um erro ao tentar Buscar Todos." . $e;
+        }
     }
-
+    
     private function selectColaboradorProcedure(){
         $sql = "CALL SP_SELECTCOLABORADOR()";
-        $smtm = $this->connect->prepare($sql);
+        $smtm = $this->connect->getConnection()->prepare($sql);
         $smtm->execute();
-        $result = $stmt->get_result();
-    
-        if ($result && $result->num_rows > 0) {
-            $rows = $result->fetch_all(MYSQLI_ASSOC);
-            $result->free();
-            return $rows;
-        }
+        $result = $smtm->get_result();
+        
+        return $result;
+        
+    }
+    private function criaArray($row){
+        $this->colaborador = new Colaborador();
+        $this->colaborador->setId($row['id']);
+        $this->colaborador->setNome($row['nome']);
+        $this->colaborador->setCpf($row['cpf']);
+        $this->colaborador->setEmail($row['email']);
+        $this->colaborador->setSenha($row['senha']);
+        $this->colaborador->setAprovacao($row['aprovacao']);
+        
+        return $this->colaborador;
+        
     }
 
     function __destruct(){

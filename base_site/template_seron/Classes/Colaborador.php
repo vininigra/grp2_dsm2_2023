@@ -3,7 +3,7 @@ require_once('Conexao.php');
 require_once('Pessoa.php');
 
 class Colaborador extends Pessoa{
-    private $cpf, $senha,$connect;
+    private $cpf, $senha,$aprovacao,$connect;
     // Instancia um objeto Colaborador conectando ao banco de dados
     function __construct(){
         $this->connect = new Conexao();
@@ -23,6 +23,29 @@ class Colaborador extends Pessoa{
         return $result;
         
     }
+    public function setAprovacao($aprovacao){
+        $this->aprovacao = $aprovacao;
+    }
+    public function getAprovacao(){
+        return $this->aprovacao;
+    }
+    
+    public function setCPF($cpf){
+        $this->cpf = $cpf;
+
+    }
+    public function setSenha($senha){
+        $this->senha = $senha;
+    }
+    public function getCPF(){
+        return $this->cpf;
+    }
+    public function getSenha(){
+        return $this->senha;
+    }
+
+
+
     private function insercao($nome, $cpf, $email, $senha){
         $result = $this->selectEmail($email);
         // Verificando se o e-mail já está cadastrado

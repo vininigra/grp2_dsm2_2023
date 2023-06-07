@@ -1,7 +1,7 @@
 <?php
     require_once('Conexao.php');
 abstract class Pessoa{
-    private $nome, $email,$senha;
+    private $nome, $email,$senha, $id;
      // Método para criptografar a senha
      protected function criptografarSenha($senha) {
         $hash = password_hash($senha, PASSWORD_DEFAULT);
@@ -16,6 +16,26 @@ abstract class Pessoa{
             return false;
         }
     }
+    public function setId($id){
+        $this->id = $id;
+    }
+    public function getId(){
+        return $this->id;
+    }
+    
+    public function setNome($nome){
+        $this->nome = $nome;
+    }
+    public function getNome(){
+        return $this->nome;
+    }
+    public function setEmail($email){
+        $this->email = $email;
+    }
+    public function getEmail(){
+        return $this->email;
+    }
+    
     // Método que verifica se os campos senha e confirma senha estão correspondentes
     public function comparaSenha($senha,$confirmaSenha){
         if($senha != $confirmaSenha) {

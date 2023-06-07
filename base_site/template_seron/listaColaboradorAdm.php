@@ -1,7 +1,7 @@
 <?php
 
 include('session.php');
-include_once "Classes/evento.php";
+include_once "Classes/Administrador.php";
 
 
 
@@ -118,12 +118,10 @@ if (isset($_POST['Editar'])) {
             <tbody>
                 <?php foreach ($colunas as $coluna) : ?>
                     <tr>
-                        <td><?= $eventoItem->getId() ?></td>
-                        <td><?= $eventoItem->getData() ?></td>
-                        <td><?= $eventoItem->getHora() ?></td>
-                        <td><?= $eventoItem->getLocal() ?></td>
-                        <td><?= $eventoItem->getTipo_esporte() ?></td>
-                        <td><?= $eventoItem->getFaixa_etaria() ?></td>
+                        <td><?= $coluna->getNome() ?></td>
+                        <td><?= $coluna->getCPF() ?></td>
+                        <td><?= $coluna->getEmail() ?></td>
+                      
                         <td class="text-center">
                             <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $eventoItem->getId() ?>">
                                 Editar
