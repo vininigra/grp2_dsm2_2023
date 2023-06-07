@@ -32,11 +32,16 @@ class Administrador extends Pessoa {
         return $this->senha;
     }
     public function aprovaColaborador(){
+        
 
     }
     public function recusaColaborador(){
 
     }
+    public function selectColaborador(){
+        $this->selectColaboradorProcedure();
+    }
+
     private function selectColaboradorProcedure(){
         $sql = "CALL SP_SELECTCOLABORADOR()";
         $smtm = $this->connect->prepare($sql);
@@ -45,6 +50,9 @@ class Administrador extends Pessoa {
         $smtm->close();
         return $result;
     }
+
+    function __destruct(){
+        $this->connect->closeConnection();
 }
 
 ?>
