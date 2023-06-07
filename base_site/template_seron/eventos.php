@@ -8,7 +8,7 @@ if (isset($_SESSION['loggedin'])){
     $session_id =$_SESSION['id'];
 } else {
     $status = "Cadastre-se";
-    header('Location: login.php');   
+    header('Location: login2.php');   
 }
 
 ?>

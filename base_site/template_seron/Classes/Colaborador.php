@@ -33,7 +33,10 @@ class Colaborador extends Pessoa{
         }else{
             $insert = "INSERT INTO colaborador(nome, cpf, email, senha, aprovacao) VALUES('$nome', $cpf, '$email', '$senha','Pendente')";
             if($this->connect->getConnection()->query($insert) === TRUE){
-                echo "Dados inseridos com sucesso";
+            echo '<script>
+            alert("Dados inseridos com sucesso!");
+            window.location.href = "login2.php";
+            </script>';
             }else{
                 echo "Error: " . $insert . "<br>" . $this->connect->getConnection()->error;
             }

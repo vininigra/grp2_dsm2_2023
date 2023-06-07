@@ -48,9 +48,12 @@
               <button type="submit" class="btn btn-outline-light">Entrar</button>
             </div>
                 <div class="mt-4 text-center">
-              <span class="text-white">Não tem conta?</span>
-              <a href="register.html">Cadastre-se</a>
-            </div>
+              <!-- <span class="text-white">Cadastro de </span> -->
+              <a href="cadastro_colaborador2.php">Cadastro de colaborador</a><p>
+
+              <!-- <span class="text-white">Participante?</span> -->
+              <a href="cadastro_participante2.php">Cadastro de participante </a>
+            </div> 
           </div>
         </form>
       </div>
