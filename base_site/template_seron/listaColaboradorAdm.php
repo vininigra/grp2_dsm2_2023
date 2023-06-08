@@ -118,9 +118,12 @@ if (isset($_POST['Editar'])) {
             <tbody>
                 <?php foreach ($colunas as $coluna) : ?>
                     <tr>
+                        <td><?= $coluna->getId() ?></td>
                         <td><?= $coluna->getNome() ?></td>
                         <td><?= $coluna->getCPF() ?></td>
                         <td><?= $coluna->getEmail() ?></td>
+                        <td><?= $coluna->getAprovacao() ?></td>
+                        
                       
                         <td class="text-center">
                             <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $eventoItem->getId() ?>">
