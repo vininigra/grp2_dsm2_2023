@@ -126,8 +126,13 @@ class Evento{
     }
     private function selectEventoP($idparticipante,$idevento){   
         // Verifique se há resultados
-        $query = "SELECT fk_evento_id, fk_participante_id FROM inscricao_participante WHERE fk_evento_id = '$idevento' AND fk_participante_id = '$idparticipante'";
-        $result = $this->connect->getConnection()->query($query);
+        $query = "SELECT fk_evento_id, fk_participante_id FROM inscricao_participante WHERE fk_evento_id = ? AND fk_participante_id = ?";
+        $stmt = $this->connect->getConnection()->prepare($query);
+        $stmt->bind_param("ii", $idevento, $idparticipante);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        
         if ($result) {
             return $result;
         } else {
@@ -137,8 +142,13 @@ class Evento{
     }
     private function selectEventoC($idcolaborador,$idevento){
         // Verifique se há resultados
-        $query = "SELECT fk_evento_id, fk_colaborador_id FROM inscricao_colaborador WHERE fk_evento_id = '$idevento' AND fk_colaborador_id = '$idcolaborador'";
-        $result = $this->connect->getConnection()->query($query);
+        $query = "SELECT fk_evento_id, fk_colaborador_id FROM inscricao_colaborador WHERE fk_evento_id = ? AND fk_colaborador_id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param("ii", $idevento, $idcolaborador);
+        $smtm->execute();
+        $result = $smtm->get_result();
+
+        
         if ($result) {
             return $result;
         } else {
@@ -233,9 +243,14 @@ class Evento{
     }
     // Metodo que seleciona os eventos que o colaborador criou
     private function selectEventoCriado($sessao_id){
-        $sql = "SELECT * FROM evento WHERE fk_colaborador_id = $sessao_id";
-        $result = $this->connect->getConnection()->query($sql);
+        $sql = "SELECT * FROM evento WHERE fk_colaborador_id = ?";
+        $stmt = $this->connect->getConnection()->prepare($sql);
+        $stmt->bind_param("i", $sessao_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         return $result;
+        $stmt->close();
+       
     }
     public function read($sessao_id) {
         try {
@@ -307,37 +322,57 @@ class Evento{
             }
     }
     private function updateData($data,$sessao_id,$id_evento){
-        $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = '$sessao_id' AND id = '$id_evento'";
-        if($this->connect->getConnection()->query($data)=== TRUE){
+        $data = "UPDATE evento SET data = '$data' WHERE fk_colaborador_id = ? AND id = ?";
+        $stmt = $this->connect->getConnection()->prepare($data);
+        $stmt->bind_param("ii",$sessao_id,$id_evento);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+        
             echo "Dados inseridos";
             return $data;
             }
     }
     private function updateHora($hora,$sessao_id,$id_evento){
-        $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
-        if($this->connect->getConnection()->query($hora)=== TRUE){
+        $hora = "UPDATE evento SET hora = '$hora' WHERE fk_colaborador_id = ? AND id = ?";
+        $stmt = $this->connect->getConnection()->prepare($hora);
+        $stmt->bind_param("ii",$sessao_id,$id_evento);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+        
             echo "Dados inseridos";
             return $hora;
         }
     }
     private function updateLocal($local,$sessao_id,$id_evento){
-        $local = "UPDATE evento SET local = '$local' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
-        if($this->connect->getConnection()->query($local)=== TRUE){
+        
+        $loc = "UPDATE evento SET local = ? WHERE fk_colaborador_id = ? AND id = ?";
+        $stmt = $this->connect->getConnection()->prepare($loc);
+        $stmt->bind_param("sii",$local,$sessao_id,$id_evento);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+        
             echo "Dados inseridos";
             return $local;
         
         }
     }
     private function updateTipoEsporte($tipo_esporte,$sessao_id,$id_evento){
-        $tipo_esporte = "UPDATE evento SET tipo_esporte = '$tipo_esporte' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
-        if($this->connect->getConnection()->query($tipo_esporte)=== TRUE){
+        $tipo_esport = "UPDATE evento SET tipo_esporte = ? WHERE fk_colaborador_id = ? AND id = ?";
+        $stmt = $this->connect->getConnection()->prepare($tipo_esport);
+        $stmt->bind_param("sii",$tipo_esporte,$sessao_id,$id_evento);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
+        
             echo "Dados inseridos";
             return $tipo_esporte;
         }
     }
     private function updateFaixaEtaria($faixa_etaria,$sessao_id,$id_evento){
-        $faixa_etaria = "UPDATE evento SET faixa_etaria = '$faixa_etaria' WHERE fk_colaborador_id = '$sessao_id'AND id = '$id_evento'";
-        if($this->connect->getConnection()->query($faixa_etaria)=== TRUE){
+        $faixa_etar = "UPDATE evento SET faixa_etaria = ? WHERE fk_colaborador_id = ? AND id = ?";
+        $stmt = $this->connect->getConnection()->prepare($faixa_etar);
+        $stmt->bind_param("iii",$faixa_etaria,$sessao_id,$id_evento);
+        $stmt->execute();
+        if ($stmt->affected_rows > 0) {
             echo "Dados inseridos";
             return $faixa_etaria;
         }
@@ -357,12 +392,17 @@ class Evento{
             }
     }
     private function deleteEvento($evento, $sessao_id){
-        $delete = "DELETE FROM evento WHERE id = '$evento' AND fk_colaborador_id = '$sessao_id'";
-        if($this->connect->getConnection()->query($delete)=== TRUE){
+        $delete = "DELETE FROM evento WHERE id = ? AND fk_colaborador_id = ?";
+        $stmt = $this->connect->getConnection()->prepare($delete);
+        $stmt->bind_param("ii",$evento,$sessao_id);
+        $stmt->execute();
+        
+        if($stmt){
             echo "Evento deletado com sucesso";
         } else {
             echo "Erro ao deletar evento: " . $this->connect->getConnection()->error;
-        }    
+        }  
+        $stmt->close();  
     }
     public function delete($evento, $sessao_id) {
         $result = $this->selectEventoCriado($sessao_id);

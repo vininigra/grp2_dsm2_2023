@@ -21,10 +21,16 @@ class Participante extends Pessoa {
     }
     protected function selectEmail($email){
         // Selecao dos dados para checagem se o email que foi inserido já consta no banco de dados
-        $sql = "SELECT email FROM participante WHERE email = '$email'";
-         // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
-        $result = $this->connect->getConnection()->query($sql);
+        $sql = "SELECT email FROM participante WHERE email = ?";
+        // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
+        $stmt = $this->connect->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
         return $result;
+        $stmt->close();
+         
+        
         
     }
     private function insercao($nome, $idade, $email, $senha){
@@ -37,8 +43,13 @@ class Participante extends Pessoa {
             window.location.href = "cadastro_participante2.php";
             </script>';
         }else{
-            $insert = "INSERT INTO participante(nome, email, senha, nasc) VALUES('$nome', '$email', '$senha', '$idade')";
-            if($this->connect->getConnection()->query($insert) === TRUE){
+            $insert = "INSERT INTO participante(nome, email, senha, nasc) VALUES(?,?,?,?)";
+            $stmt = $this->connect->getConnection()->prepare($insert);
+            $stmt->bind_param("ssss", $nome, $email, $senha, $idade);
+            $stmt->execute();
+            
+
+            if($stmt){
                 echo '<script>
                 alert("Dados inseridos com sucesso!");
                 window.location.href = "login2.php";
@@ -46,7 +57,7 @@ class Participante extends Pessoa {
             }else{
                 echo "Error: " . $insert . "<br>" . $this->connect->getConnection()->error;
             }
-            
+            $stmt->close();
         }
 
     }
@@ -72,9 +83,14 @@ class Participante extends Pessoa {
         
         
         // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
-        $sql = "SELECT * FROM participante WHERE email='$email'";
-        $result = $this->connect->getConnection()->query($sql);
+        $sql = "SELECT * FROM participante WHERE email= ?";
+        $stmt = $this->connect->getConnection()->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
         return $result;
+        $stmt->close();
+       
     }
     public function login($email, $senha) {
         // Sanitizando os dados inserios

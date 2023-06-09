@@ -17,10 +17,15 @@ class Colaborador extends Pessoa{
     }
     protected function selectEmail($email){
         // Selecao dos dados para checagem se o email que foi inserido já consta no banco de dados
-        $sql = "SELECT email FROM colaborador WHERE email = '$email'";
-         // Chamada do metodo da classe Conexao, getConnect que retorna o objeto conexao criado via MYSQLI
-        $result = $this->connect->getConnection()->query($sql);
+        $sql = "SELECT email FROM colaborador WHERE email = ?";
+        // Realizando prepared statments
+        $smtm = $this->connect->getConnection()->prepare($sql);
+        $smtm->bind_param('s', $email);
+        $smtm->execute();
+        $result = $smtm->get_result();
         return $result;
+
+        
         
     }
     public function setAprovacao($aprovacao){
@@ -54,8 +59,12 @@ class Colaborador extends Pessoa{
             echo "Email já cadastrado";
         // Se retornar 0, a condição vai chamar uma query INSERT para colocar as informacoes do novo cadastro no banco de dados
         }else{
-            $insert = "INSERT INTO colaborador(nome, cpf, email, senha, aprovacao) VALUES('$nome', $cpf, '$email', '$senha','Pendente')";
-            if($this->connect->getConnection()->query($insert) === TRUE){
+            $insert = "INSERT INTO colaborador(nome, cpf, email, senha, aprovacao) VALUES(?,?,?,?,'Pendente')";
+            $smtm = $this->connect->getConnection()->prepare($insert);
+            $smtm->bind_param('ssss', $nome, $cpf, $email, $senha);
+            $smtm->execute();
+            
+            if($smtm){
             echo '<script>
             alert("Dados inseridos com sucesso!");
             window.location.href = "login2.php";
@@ -63,6 +72,7 @@ class Colaborador extends Pessoa{
             }else{
                 echo "Error: " . $insert . "<br>" . $this->connect->getConnection()->error;
             }
+            $smtm->close();
         }
     }
     public function cadastrar($nome, $cpf, $email, $senha){
@@ -86,9 +96,15 @@ class Colaborador extends Pessoa{
         
         
         // Consultar o banco de dados para encontrar o registro correspondente ao email e à senha
-        $sql = "SELECT * FROM colaborador WHERE email='$email'";
-        $result = $this->connect->getConnection()->query($sql);
+        $sql = "SELECT * FROM colaborador WHERE email= ? ";
+        // Realizando prepared statments
+        $smtm = $this->connect->getConnection()->prepare($sql);
+        $smtm->bind_param('s', $email);
+        $smtm->execute();
+        $result = $smtm->get_result();
         return $result;
+        $smtm->close();
+        
     }
     public function login($email, $senha) {
         // Sanitizando os dados inserios
