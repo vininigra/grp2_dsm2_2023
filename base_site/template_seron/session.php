@@ -5,15 +5,18 @@ session_start();
 if (isset($_SESSION['loggedin'])){
     $status = "Logado";
     $adm = $_SESSION['adm'];
+    
     if($adm){
         $nome = $_SESSION['user'];
         $colaborador = $_SESSION['colaborador'];
         $session_id = $_SESSION['id'];
-    }else if($colaborador){
+    }else if($colaborador = $_SESSION['colaborador']){
         $colaborador = $_SESSION['colaborador'];
         $session_id = $_SESSION['id'];
+        $statusC = $_SESSION['aprovacao'];
     }else{
         $colaborador = $_SESSION['colaborador'];
+        $session_id = $_SESSION['id'];
     }
    
     

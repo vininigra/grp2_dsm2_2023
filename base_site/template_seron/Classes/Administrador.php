@@ -49,6 +49,15 @@ class Administrador extends Pessoa {
         $smtm->close();
 
     }
+    private function selectColaboradorEspecifico($id_colaborador){
+        $query = "SELECT aprovacao FROM colaborador WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $id_colaborador);
+        $smtm->execute();
+        $result = $smtm->get_result();
+        $smtm->close();
+        return $result;
+    }
     public function loginAdm($name, $senha){
         $result = $this->selectAdm($name, $senha);
 
@@ -57,11 +66,14 @@ class Administrador extends Pessoa {
             $_SESSION['adm'] = true;
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['user'] = $row['nome'];
-            header('Location: adm.php');
-        else{
-            header('Location: index.php');
+            $_SESSION['adm'] = TRUE;
+            $_SESSION['colaborador'] = False;
+            $_SESSION['id'] = $row['id'];
+            echo '<script>
+            alert("Login realizado");
+            window.location.href = "adm.php";
+            </script>';
         }
-
     }
     private function selectAdm($name, $senha){
         $query = "SELECT nome, senha FROM administrador WHERE nome = ? AND senha = ?"; 
@@ -72,6 +84,32 @@ class Administrador extends Pessoa {
         $smtm->close();
         return $result;
 
+    }
+    public function deleteColaboradorAdm($id_colaborador){
+        $this->deleteColaborador($id_colaborador);
+        echo '<script>
+        alert("Exclusão realizada com sucesso");
+        window.location.href = "adm.php";
+        </script>';
+    }
+    private function deleteColaborador($id_colaborador){
+        $query = "DELETE FROM colaborador WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $id_colaborador);
+        $smtm->execute();
+        $smtm->close();
+
+    }
+   
+    public function checaAprovacao($id_colaborador){
+        $result = $this->selectColaboradorEspecifico($id_colaborador);
+        while($row = $result->fetch_assoc()){
+            if($row['aprovacao'] == 'Aprovado'){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
     public function selectColaborador(){
         

@@ -107,6 +107,7 @@ class Colaborador extends Pessoa{
             if($this->comparaSenhaBanco($senha, $hash) === TRUE){
                 $_SESSION['id'] = $row['id'];
                 $_SESSION['user'] = $row['nome'];
+                $_SESSION['aprovacao'] = $row['aprovacao'];
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['colaborador'] = TRUE;
                 $_SESSION['adm'] = FALSE;

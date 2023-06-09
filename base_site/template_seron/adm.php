@@ -121,10 +121,10 @@ $colunas = $admin->selectColaborador();
                         <td class="text-center">
                             <a href="aprovaColaborador.php?id=<?= $coluna->getId() ?>" >
                             <button class="btn  btn-warning btn-sm" >
-                                Libera/Bloqueia
+                                Libera/Pendencia
                             </button>
                             </a>
-                            <a href="deleteEvento.php?id=<?= $coluna->getId() ?>" >
+                            <a href="deleteColaborador.php?id=<?= $coluna->getId() ?>" >
                                 <button class="btn btn-danger btn-sm" type="button">Excluir</button>
                             </a>
 

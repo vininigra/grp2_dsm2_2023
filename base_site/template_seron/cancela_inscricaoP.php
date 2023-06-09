@@ -6,7 +6,7 @@ require_once('Classes/evento.php');
 $evento = new Evento();
 $id = $_GET['id'];
 //Chamada do metodo de insercao de dados na tabela inscricao_particilpante
-$evento->inscricaoPartipante($session_id, $id);
+$evento->cancelaInscricaoParticipante($session_id, $id);
 
 // Fechando conexao com o banco de dados
 unset($evento);

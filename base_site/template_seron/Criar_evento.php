@@ -18,7 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
         // Instanciando objeto evento e chamando o método para criar o evento
         $evento = new Evento();
-        $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
+        if($status == "Aprovado"){
+            $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
+        }else{
+            echo '<script>
+            alert("Login pendente de aprovação");
+            window.location.href = "Criar_evento.php";
+            </script>';
+        }
 
         
         
