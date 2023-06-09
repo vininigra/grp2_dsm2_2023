@@ -60,7 +60,6 @@ class Administrador extends Pessoa {
         $smtm = $this->connect->getConnection()->prepare($sql);
         $smtm->execute();
         $result = $smtm->get_result();
-        
         return $result;
         
     }

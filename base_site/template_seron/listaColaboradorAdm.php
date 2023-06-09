@@ -12,11 +12,11 @@ $colunas = $admin->selectColaborador();
 
 if (isset($_POST['Editar'])) {
     // Criando variáveis para receber as informações do formulário
-    $data = $_POST['data'];
-    $hora = $_POST['hora'];
-    $local = $_POST['local'];
-    $tipo_esporte = $_POST['tipo_esporte'];
-    $faixa_etaria = $_POST['faixa_etaria'];
+    $id = $_POST['id'];
+    $nome = $_POST['nome'];
+    $cpf = $_POST['cpf'];
+    $email = $_POST['email'];
+    $aprovacao = $_POST['aprovacao'];
 }
 
 ?>
@@ -107,11 +107,11 @@ if (isset($_POST['Editar'])) {
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                    <th>Local</th>
-                    <th>Esporte</th>
-                    <th>Idade</th>
+                    <th>Nome</th>
+                    
+                    <th>CPF</th>
+                    <th>Email</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -126,65 +126,17 @@ if (isset($_POST['Editar'])) {
                         
                       
                         <td class="text-center">
-                            <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $eventoItem->getId() ?>">
-                                Editar
+                            <a href=""><button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $coluna->getId() ?>"></a>
+                                Libera/Bloqueia
                             </button>
-                            <a href="deleteEvento.php?id=<?= $eventoItem->getId() ?>" >
+                            <a href="deleteEvento.php?id=<?= $coluna->getId() ?>" >
                                 <button class="btn btn-danger btn-sm" type="button">Excluir</button>
                             </a>
 
                         </td>
                     </tr>
-                    <!-- Modal -->
-                    <div class="modal fade" id="editar<?= $eventoItem->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="updateEvento.php" method="POST">
-                                        <div class="row">
-                                            <div class="col-md-5">
-                                                <label>Data</label>
-                                                <input type="date" name="data" value="<?= $eventoItem->getData() ?>" class="form-control" required />
-                                            </div>
-                                            <div class="col-md-7">
-                                                <label>Hora</label>
-                                                <input type="time" name="hora" value="<?= $eventoItem->getHora() ?>" class="form-control" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <label>Local</label>
-                                                <input type="text" name="local" value="<?= $eventoItem->getLocal() ?>" class="form-control" required />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label>Esporte</label>
-                                                <input type="text" name="tipo_esporte" value="<?= $eventoItem->getTipo_esporte() ?>" class="form-control" required />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label>Idade</label>
-                                                <input type="number" name="faixa_etaria" value="<?= $eventoItem->getFaixa_etaria() ?>" class="form-control" required />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-2">
-                                                <br>
-                                                <input type="hidden" name="id" value="<?= $eventoItem->getId() ?>" />
-                                                <button class="btn btn-primary" type="submit" name="editar">Editar</button>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
                 <?php endforeach ?>
             </tbody>
         </table>
