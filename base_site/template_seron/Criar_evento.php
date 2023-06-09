@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 
         // Instanciando objeto evento e chamando o método para criar o evento
         $evento = new Evento();
-        if($status == "Aprovado"){
+        if($statusC == "Aprovado"){
             $evento->createEvento($data, $hora, $local, $tipo_esporte, $faixa_etaria, $session_id);
         }else{
             echo '<script>

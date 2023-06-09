@@ -3,12 +3,15 @@
 include('session.php');
 include_once "Classes/Administrador.php";
 
+if($adm){
+    $admin = new Administrador();
+
+    $colunas = $admin->selectColaborador();  
+}else{
+    header("Location: index.php");
+}
 
 
-$admin = new Administrador();
-
-$colunas = $admin->selectColaborador();
-// Verifica se o formulário foi enviado
 
 
 

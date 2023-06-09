@@ -1,15 +1,5 @@
 <?php
-session_start();
-
-// Verifica se a sessão está iniciada
-if (isset($_SESSION['loggedin'])){
-    $status = "Logado";
-    $colaborador = $_SESSION['colaborador'];
-    $session_id =$_SESSION['id'];
-} else {
-    $status = "Cadastre-se";
-    header('Location: login2.php');   
-}
+require_once('session.php');
 
 ?>
 <!DOCTYPE php>
@@ -54,14 +44,19 @@ if (isset($_SESSION['loggedin'])){
                                 <li><a href="about-us.php">Sobre Nós</a></li>
                                 
                                 <li>
-                                    <?php if($status == 'Logado'){
+                                <?php if($status == 'Logado'){
                                         
-                                       echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
-                                    }else{
-                                        echo '<a href="cadastro.php">'  . $status . '</a>';
-                                    } ?>
-                                </li>
-                                <?php
+                                       
+                                        if($adm){
+                                             echo '<a> Logado: Admin </a>';
+                                        }else{
+                                             echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                        }
+                                     }else{
+                                         echo '<a href="cadastro.php">'  . $status . '</a>';
+                                     } ?>
+                                 </li>
+                                 <?php
                                    if($status == 'Logado'){
                                     if($colaborador == TRUE) 
                                         echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';

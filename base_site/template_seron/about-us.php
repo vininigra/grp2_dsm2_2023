@@ -48,7 +48,12 @@ include('session1.php');
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
-                                       echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       
+                                       if($adm){
+                                            echo '<a> Logado: Admin </a>';
+                                       }else{
+                                            echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }
                                     }else{
                                         echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>

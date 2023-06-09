@@ -46,7 +46,12 @@ include('session1.php');
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
-                                       echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       
+                                       if($adm){
+                                            echo '<a> Logado: Admin </a>';
+                                       }else{
+                                            echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }
                                     }else{
                                         echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>
@@ -56,7 +61,9 @@ include('session1.php');
                                         if($colaborador == TRUE) 
                                             echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
                                             echo '<li> <a href="logout.php"> Sair </a> </li>';
-                                    }         
+                                        
+                                              
+                                    }    
                                 ?>
                                 
                             </ul>
