@@ -10,13 +10,7 @@ $admin = new Administrador();
 $colunas = $admin->selectColaborador();
 // Verifica se o formulário foi enviado
 
-if (isset($_POST['Editar'])) {
-    // Criando variáveis para receber as informações do formulário
-    $id = $_POST['id'];
-    $nome = $_POST['nome'];
-    $cpf = $_POST['cpf'];
-    $email = $_POST['email'];
-    $aprovacao = $_POST['aprovacao'];
+if(isset($_POST['submit'])){
 }
 
 ?>
@@ -124,9 +118,9 @@ if (isset($_POST['Editar'])) {
                         <td><?= $coluna->getEmail() ?></td>
                         <td><?= $coluna->getAprovacao() ?></td>
                         
-                      
+                      <form method="post "action="">
                         <td class="text-center">
-                            <a href=""><button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $coluna->getId() ?>"></a>
+                            <button type="submit" class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $coluna->getId() ?>">
                                 Libera/Bloqueia
                             </button>
                             <a href="deleteEvento.php?id=<?= $coluna->getId() ?>" >
@@ -134,6 +128,7 @@ if (isset($_POST['Editar'])) {
                             </a>
 
                         </td>
+                        </form>
                     </tr>
                     
                     
