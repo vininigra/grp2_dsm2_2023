@@ -10,8 +10,7 @@ $admin = new Administrador();
 $colunas = $admin->selectColaborador();
 // Verifica se o formulário foi enviado
 
-if(isset($_POST['submit'])){
-}
+
 
 ?>
 
@@ -118,17 +117,19 @@ if(isset($_POST['submit'])){
                         <td><?= $coluna->getEmail() ?></td>
                         <td><?= $coluna->getAprovacao() ?></td>
                         
-                      <form method="post "action="">
+                      
                         <td class="text-center">
-                            <button type="submit" class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $coluna->getId() ?>">
+                            <a href="aprovaColaborador.php?id=<?= $coluna->getId() ?>" >
+                            <button class="btn  btn-warning btn-sm" >
                                 Libera/Bloqueia
                             </button>
+                            </a>
                             <a href="deleteEvento.php?id=<?= $coluna->getId() ?>" >
                                 <button class="btn btn-danger btn-sm" type="button">Excluir</button>
                             </a>
 
                         </td>
-                        </form>
+                        
                     </tr>
                     
                     

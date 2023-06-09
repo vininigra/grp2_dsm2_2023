@@ -96,6 +96,7 @@ class Participante extends Pessoa {
                 $_SESSION['user'] = $row['nome'];
                 $_SESSION['loggedin'] = TRUE;
                 $_SESSION['colaborador'] = FALSE;
+                $_SESSION['adm'] = FALSE;
                 echo '<script>
                 alert("Login realizado com sucesso!");
                 window.location.href = "index.php";

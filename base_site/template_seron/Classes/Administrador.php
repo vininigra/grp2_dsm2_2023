@@ -32,11 +32,45 @@ class Administrador extends Pessoa {
     public function getSenha(){
         return $this->senha;
     }
-    public function aprovaColaborador(){
-        
+    public function aprovaColaborador($id_colaborador){
+        $query = "UPDATE colaborador SET aprovacao = 'Aprovado' WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $id_colaborador);
+        $smtm->execute();
+        $smtm->close();
+
 
     }
-    public function recusaColaborador(){
+    public function recusaColaborador($id_colaborador){
+        $query = "UPDATE colaborador SET aprovacao = 'Pendente' WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $id_colaborador);
+        $smtm->execute();
+        $smtm->close();
+
+    }
+    public function loginAdm($name, $senha){
+        $result = $this->selectAdm($name, $senha);
+
+        if($result->num_rows > 0){
+            session_start();
+            $_SESSION['adm'] = true;
+            $_SESSION['loggedin'] = TRUE;
+            $_SESSION['user'] = $row['nome'];
+            header('Location: adm.php');
+        else{
+            header('Location: index.php');
+        }
+
+    }
+    private function selectAdm($name, $senha){
+        $query = "SELECT nome, senha FROM administrador WHERE nome = ? AND senha = ?"; 
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('ss', $name, $senha);
+        $smtm->execute();
+        $result = $smtm->get_result();
+        $smtm->close();
+        return $result;
 
     }
     public function selectColaborador(){
