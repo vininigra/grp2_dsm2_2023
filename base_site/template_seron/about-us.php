@@ -44,7 +44,15 @@ include('session1.php');
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-                                
+                                <?php
+                                    if($status == 'Logado'){
+                                        if($colaborador == TRUE) 
+                                            echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
+                                        
+                                              
+                                    }    
+                                ?>
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
@@ -58,13 +66,7 @@ include('session1.php');
                                         echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>
                                 </li>
-                                <?php
-                                    if($status == 'Logado'){
-                                        if($colaborador == TRUE) 
-                                            echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
-                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
-                                    }         
-                                ?>
+                               
                                 
                             </ul>
                         </nav><!-- / #primary-nav -->
