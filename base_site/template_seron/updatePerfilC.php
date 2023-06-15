@@ -123,17 +123,17 @@ if (isset($_POST['Editar'])) {
                         <td><?= $colab->getCPF() ?></td>
                         
                         <td class="text-center">
-                            <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $colaboradorItem->getId() ?>">
+                            <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $colab->getId() ?>">
                                 Editar
                             </button>
-                            <a href="deleteEvento.php?id=<?= $eventoItem->getId() ?>" >
-                                <button class="btn btn-danger btn-sm" type="button">Excluir</button>
+                            <a href="deleteEvento.php?id=<?= $colab->getId() ?>" >
+                                <button class="btn btn-danger btn-sm" type="button">Encerrar conta</button>
                             </a>
 
                         </td>
                     </tr>
                     <!-- Modal -->
-                    <div class="modal fade" id="editar<?= $eventoItem->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="editar<?= $colab->getId() ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -146,18 +146,18 @@ if (isset($_POST['Editar'])) {
                                     <form action="updateEvento.php" method="POST">
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <label>Data</label>
-                                                <input type="date" name="data" value="<?= $eventoItem->getData() ?>" class="form-control" required />
+                                                <label>Nome</label>
+                                                <input type="text" name="name" value="<?= $colab->getNome() ?>" class="form-control" required />
                                             </div>
                                             <div class="col-md-7">
-                                                <label>Hora</label>
-                                                <input type="time" name="hora" value="<?= $eventoItem->getHora() ?>" class="form-control" required />
+                                                <label>E-mail</label>
+                                                <input type="email" name="email" value="<?= $colab->getEmail() ?>" class="form-control" required />
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <label>Local</label>
-                                                <input type="text" name="local" value="<?= $eventoItem->getLocal() ?>" class="form-control" required />
+                                                <label>CPF</label>
+                                                <input type="text" name="cpf" value="<?= $colab->getCpf() ?>" class="form-control" required />
                                             </div>
                                             <div class="col-md-3">
                                                 <label>Esporte</label>
