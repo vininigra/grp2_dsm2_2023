@@ -159,19 +159,12 @@ if (isset($_POST['Editar'])) {
                                                 <label>CPF</label>
                                                 <input type="text" name="cpf" value="<?= $colab->getCpf() ?>" class="form-control" required />
                                             </div>
-                                            <div class="col-md-3">
-                                                <label>Esporte</label>
-                                                <input type="text" name="tipo_esporte" value="<?= $eventoItem->getTipo_esporte() ?>" class="form-control" required />
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label>Idade</label>
-                                                <input type="number" name="faixa_etaria" value="<?= $eventoItem->getFaixa_etaria() ?>" class="form-control" required />
-                                            </div>
+                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <br>
-                                                <input type="hidden" name="id" value="<?= $eventoItem->getId() ?>" />
+                                                <input type="hidden" name="id" value="<?= $colab->getId() ?>" />
                                                 <button class="btn btn-primary" type="submit" name="editar">Editar</button>
                                             </div>
                                         </div>
