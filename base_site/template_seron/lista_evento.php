@@ -59,22 +59,31 @@
                                 <li><a href="eventos.php">Eventos</a></li>
 
                                 <li><a href="about-us.php">Sobre Nós</a></li>
-                                
+                                <?php
+                                    if($status == 'Logado'){
+                                        if($colaborador == TRUE) 
+                                            echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
+                                        
+                                              
+                                    }    
+                                ?>
                                 <li>
                                     <?php if($status == 'Logado'){
                                         
-                                       echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       
+                                       if($adm){
+                                            echo '<a> Logado: Admin </a>';
+                                       }else if($colaborador){
+                                            echo '<a href="updatePerfilC.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }else{
+                                        echo '<a href="updatePerfilP.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }
                                     }else{
                                         echo '<a href="cadastro.php">'  . $status . '</a>';
                                     } ?>
                                 </li>
-                                <?php
-                                   if($status == 'Logado'){
-                                    if($colaborador == TRUE) 
-                                        echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
-                                        echo '<li> <a href="logout.php"> Sair </a> </li>';
-                                }          
-                                ?>
+                                
                                 
                             </ul>
                         </nav><!-- / #primary-nav -->

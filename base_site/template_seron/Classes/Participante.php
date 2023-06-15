@@ -134,6 +134,53 @@ class Participante extends Pessoa {
     public function getIdade(){
         return $this->idade;
     }
+    private function updateNome($session_id, $nome){
+        $query = "UPDATE participante SET nome = ? WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $nome, $session_id);
+        $smtm->execute();
+        $smtm->close();
+
+
+    }
+    private function updateEmail($session_id, $email){
+        $query = "UPDATE participante SET email = ? WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $email, $session_id);
+        $smtm->execute();
+        $smtm->close();
+    }
+    private function updateIdade($session_id, $idade){
+        $query = "UPDATE participante SET nasc = ? WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $idade, $session_id);
+        $smtm->execute();
+    }
+    public function update($session_id, $nome, $email, $data_nascimento){
+        $result = $this->selectParticipante($session_id);
+
+        if($result->num_rows  == 1){
+            $this->updateNome($session_id, $nome);
+            $this->updateEmail($session_id, $email);
+            $this->updateIdade($session_id, $data_nascimento);
+            echo '<script>
+            alert("Dados alterados com sucesso!");
+            window.location.href = "updatePerfilP.php";
+            </script>';
+        }else{
+            echo '<script>
+            alert("Dados não encontrados!");
+            window.location.href = "updatePerfilP.php";
+            </script>';    
+    }
+    }
+    public function delete($session_id){
+        $query = "DELETE FROM participante WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $session_id);
+        $smtm->execute();
+        $smtm->close();
+    }
     private function selectParticipante($session_id){
         $query = "SELECT * FROM participante WHERE id = ?";
         $smtm = $this->connect->getConnection()->prepare($query);

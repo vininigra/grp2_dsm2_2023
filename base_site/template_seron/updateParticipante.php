@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $participante->update($session_id, $nome, $email, $data_nascimento);
         
         // Redireciona para a página de listagem de eventos
-        header('location: updatePerfilC.php');
+        
         exit(); // Encerra o script para evitar a execução desnecessária de código
     }else{
         $participante->delete($session_id);

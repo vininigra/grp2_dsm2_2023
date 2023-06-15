@@ -52,19 +52,21 @@ require_once('session.php');
                                     }    
                                 ?>
                                 <li>
-                                <?php if($status == 'Logado'){
+                                    <?php if($status == 'Logado'){
                                         
                                        
-                                        if($adm){
-                                             echo '<a> Logado: Admin </a>';
-                                        }else{
-                                             echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
-                                        }
-                                     }else{
-                                         echo '<a href="cadastro.php">'  . $status . '</a>';
-                                     } ?>
-                                 </li>
-                               
+                                       if($adm){
+                                            echo '<a> Logado: Admin </a>';
+                                       }else if($colaborador){
+                                            echo '<a href="updatePerfilC.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }else{
+                                        echo '<a href="updatePerfilP.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }
+                                    }else{
+                                        echo '<a href="cadastro.php">'  . $status . '</a>';
+                                    } ?>
+                                </li>
+                                
                                 
                             </ul>
                         </nav><!-- / #primary-nav -->

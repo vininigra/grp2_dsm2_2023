@@ -57,8 +57,10 @@ include('session1.php');
                                        
                                        if($adm){
                                             echo '<a> Logado: Admin </a>';
+                                       }else if($colaborador){
+                                            echo '<a href="updatePerfilC.php"> Logado:' .  $_SESSION['user'] . ' </a>';
                                        }else{
-                                            echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
+                                        echo '<a href="updatePerfilP.php"> Logado:' .  $_SESSION['user'] . ' </a>';
                                        }
                                     }else{
                                         echo '<a href="cadastro.php">'  . $status . '</a>';

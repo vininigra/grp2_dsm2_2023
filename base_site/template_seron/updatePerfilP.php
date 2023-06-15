@@ -53,29 +53,38 @@ if (isset($_POST['Editar'])) {
                     </div></a>
                     <nav id="primary-nav" class="dropdown cf">
                     <ul class="dropdown menu">
-                            <li class='active'><a href="index.php">Página Inicial</a></li>
+                                <li class='active'><a href="index.php">Página Inicial</a></li>
 
-                            <li><a href="eventos.php">Eventos</a></li>
+                                <li><a href="eventos.php">Eventos</a></li>
 
-                            <li><a href="about-us.php">Sobre Nós</a></li>
-                            
-                            <li>
-                                <?php if($status == 'Logado'){
-                                    
-                                   echo '<a> Logado:' .  $_SESSION['user'] . ' </a>';
-                                }else{
-                                    echo '<a href="cadastro.php">'  . $status . '</a>';
-                                } ?>
-                            </li>
-                            <?php
-                               if($status == 'Logado'){
-                                if($colaborador == TRUE) 
-                                    echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
-                                    echo '<li> <a href="logout.php"> Sair </a> </li>';
-                            }          
-                            ?>
-                            
-                        </ul>
+                                <li><a href="about-us.php">Sobre Nós</a></li>
+                                <?php
+                                    if($status == 'Logado'){
+                                        if($colaborador == TRUE) 
+                                            echo '<li> <a href="Criar_evento.php"> Criar Evento </a> </li>';
+                                            echo '<li> <a href="logout.php"> Sair </a> </li>';
+                                        
+                                              
+                                    }    
+                                ?>
+                                <li>
+                                    <?php if($status == 'Logado'){
+                                        
+                                       
+                                       if($adm){
+                                            echo '<a> Logado: Admin </a>';
+                                       }else if($colaborador){
+                                            echo '<a href="updatePerfilC.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }else{
+                                        echo '<a href="updatePerfilP.php"> Logado:' .  $_SESSION['user'] . ' </a>';
+                                       }
+                                    }else{
+                                        echo '<a href="cadastro.php">'  . $status . '</a>';
+                                    } ?>
+                                </li>
+                                
+                                
+                            </ul>
                     </nav><!-- / #primary-nav -->
                 </div>
             </div>
@@ -126,7 +135,7 @@ if (isset($_POST['Editar'])) {
                             <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $part->getId() ?>">
                                 Editar
                             </button>
-                            <a href="encerrarConta.php?id=<?= $part->getId() ?>" >
+                            <a href="encerrarContaP.php?id=<?= $part->getId() ?>" >
                                 <button class="btn btn-danger btn-sm" type="button">Encerrar conta</button>
                             </a>
 
@@ -156,15 +165,15 @@ if (isset($_POST['Editar'])) {
                                         </div>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <label>CPF</label>
-                                                <input type="text" name="cpf" value="<?= $part->getIdade() ?>" class="form-control" required />
+                                                <label>Data Nascimento</label>
+                                                <input type="date" name="data_nascimento" value="<?= $part->getIdade() ?>" class="form-control" required />
                                             </div>
                                             
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <br>
-                                                <input type="hidden" name="id" value="<?= $colab->getId() ?>" />
+                                                <input type="hidden" name="id" value="<?= $part->getId() ?>" />
                                                 <button class="btn btn-primary" type="submit" name="editar">Editar</button>
                                             </div>
                                         </div>
