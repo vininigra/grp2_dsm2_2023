@@ -54,7 +54,7 @@ $dadosUsuario = $userColaborador->selectColaborador($sessao_id);
                 <th>Nome</th>
                 <th>Email</th>
                 <th>CPF</th>
-                <th>Senha</th>
+                <th></th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -65,8 +65,7 @@ $dadosUsuario = $userColaborador->selectColaborador($sessao_id);
                     <td><?php echo $userColaborador['nome']; ?></td>
                     <td><?php echo $userColaborador['email']; ?></td>
                     <td><?php echo $userColaborador['cpf']; ?></td>
-                    <td><?php echo $userColaborador['senha']; ?></td>
-                    <td>
+                    
                         <form action="" method="POST">
                             <input type="hidden" name="id" value="<?php echo $userColaborador['id']; ?>">
                             <button type="submit" name="editar">Editar</button>

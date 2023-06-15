@@ -39,6 +39,7 @@ class Colaborador extends Pessoa{
         $this->cpf = $cpf;
 
     }
+    
     public function setSenha($senha){
         $this->senha = $senha;
     }
@@ -136,6 +137,31 @@ class Colaborador extends Pessoa{
         } else {
             return "Email ou senha incorretos";
         }
+    }
+    private function selectColaborador($session_id){
+        $query = "SELECT * FROM colaborador WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $session_id);
+        $smtm->execute();
+        $result = $smtm->get_result();
+        return $result;
+        $smtm->close();
+
+    }
+    public function getColaborador($session_id){
+        $result = $this->selectColaborador($session_id);
+        while($row = $result->fetch_assoc()){
+            $colaborador = new Colaborador;
+            $colaborador->setId($row['id']);
+            $colaborador->setNome($row['nome']);
+            $colaborador->setEmail($row['email']);
+            $colaborador->setCPF($row['cpf']);
+            $colaborador->setSenha($row['senha']);
+            $colaborador->setAprovacao($row['aprovacao']);
+            
+
+        return $colaborador;
+    }
     }
      // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
