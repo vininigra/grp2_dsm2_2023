@@ -128,6 +128,37 @@ class Participante extends Pessoa {
             return "Email ou senha incorretos";
         }
     }
+    public function setIdade($idade){
+        $this->idade = $idade;
+    }
+    public function getIdade(){
+        return $this->idade;
+    }
+    private function selectParticipante($session_id){
+        $query = "SELECT * FROM participante WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $session_id);
+        $smtm->execute();
+        $result = $smtm->get_result();
+        return $result;
+        $smtm->close();
+
+    }
+    public function getParticipante($session_id){
+        $result = $this->selectParticipante($session_id);
+        while($row = $result->fetch_assoc()){
+            $participante = new Participante;
+            $participante->setId($row['id']);
+            $participante->setNome($row['nome']);
+            $participante->setEmail($row['email']);
+            $participante->setIdade($row['nasc']);
+            
+           
+            
+
+        return $participante;
+    }
+    }
 
     // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
