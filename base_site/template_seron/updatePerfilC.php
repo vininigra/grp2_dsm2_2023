@@ -126,7 +126,7 @@ if (isset($_POST['Editar'])) {
                             <button class="btn  btn-warning btn-sm" data-toggle="modal" data-target="#editar<?= $colab->getId() ?>">
                                 Editar
                             </button>
-                            <a href="deleteEvento.php?id=<?= $colab->getId() ?>" >
+                            <a href="encerrarConta.php?id=<?= $colab->getId() ?>" >
                                 <button class="btn btn-danger btn-sm" type="button">Encerrar conta</button>
                             </a>
 
@@ -143,7 +143,7 @@ if (isset($_POST['Editar'])) {
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="updateEvento.php" method="POST">
+                                    <form action="updateColaborador.php" method="POST">
                                         <div class="row">
                                             <div class="col-md-5">
                                                 <label>Nome</label>

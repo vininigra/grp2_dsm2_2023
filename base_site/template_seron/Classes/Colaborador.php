@@ -148,6 +148,46 @@ class Colaborador extends Pessoa{
         $smtm->close();
 
     }
+    private function updateNome($nome, $session_id){
+        $query = "UPDATE colaborador SET nome = ? WHERE id = ?"; 
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $nome, $session_id);
+        $smtm->execute();
+        $smtm->close();
+    }
+    private function updateEmail($email, $session_id){
+        $query = "UPDATE colaborador SET email = ? WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $email, $session_id);
+        $smtm->execute();
+        $smtm->close();
+    }
+    private function updateCPF($cpf, $session_id){
+        $query = "UPDATE colaborador SET cpf = ? WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('si', $cpf, $session_id);
+        $smtm->execute();
+        $smtm->close();
+
+    }
+    public function update($session_id, $nome, $email, $cpf){
+        $result = $this->selectColaborador($session_id);
+
+        if($result->num_rows > 0){
+            $this->updateNome($nome, $session_id);
+            $this->updateEmail($email, $session_id);
+            $this->updateCPF($cpf, $session_id);
+            echo '<script>
+            alert("Dados alterados com sucesso!");
+            window.location.href = "updatePerfilC.php";
+            </script>';
+        }else{
+            echo '<script>
+            alert("Dados não encontrados!");
+            window.location.href = "pdatePerfilC.php";
+            </script>';    
+    }
+    }
     public function getColaborador($session_id){
         $result = $this->selectColaborador($session_id);
         while($row = $result->fetch_assoc()){
@@ -162,6 +202,13 @@ class Colaborador extends Pessoa{
 
         return $colaborador;
     }
+    }
+    public function delete($session_id){
+        $query = "DELETE FROM colaborador WHERE id = ?";
+        $smtm = $this->connect->getConnection()->prepare($query);
+        $smtm->bind_param('i', $session_id);
+        $smtm->execute();
+        $smtm->close();
     }
      // Destruindo o objeto e fechando a conexao com o banco de dados
     public function __destruct(){
