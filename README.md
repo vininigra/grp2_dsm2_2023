@@ -5,10 +5,10 @@ Repositório destinado a atualizações do projeto "SERON", desenvolvido a parti
 # Componentes do grupo
 
 Carlos Digasperi <p>
-Guilherme Afonso
-Matheus Matias
-Vinicius Nigra
-Vitor Carvalho
+Guilherme Afonso<p>
+Matheus Matias<p>
+Vinicius Nigra<p>
+Vitor Carvalho<p>
 
 # SERON - Sua plataforma de eventos poliesportivos
 
