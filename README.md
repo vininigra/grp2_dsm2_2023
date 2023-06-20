@@ -4,7 +4,7 @@ Repositório destinado a atualizações do projeto "SERON", desenvolvido a parti
 
 # Componentes do grupo
 
-Carlos Digasperi
+Carlos Digasperi <p>
 Guilherme Afonso
 Matheus Matias
 Vinicius Nigra
