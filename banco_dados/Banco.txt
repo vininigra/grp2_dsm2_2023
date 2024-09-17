@@ -1,0 +1,67 @@
+/*--------------------------------------------------------------------------------------------------------------------------------*/
+/*GRUPO DO PI-2 
+/*POPULANDO TABELA EVENTO */
+USE SERON;
+INSERT INTO evento (data,hora,local,tipo_esporte,faixa_etaria) 
+	VALUES("2023-05-15","21:00:00",'CENTRO ESPORTES RIO CLARO','FUTEBOL',35);
+
+
+
+
+/* Store PROCEDURE DO PI (seron) */
+/* Listar Eventos */
+DELIMITER $
+CREATE OR REPLACE PROCEDURE SP_LISTAREVENTOS()
+BEGIN
+	SELECT e.id,e.`data`,e.hora,e.`local`,e.tipo_esporte AS Esporte,e.faixa_etaria
+	FROM evento e;
+	
+END $
+DELIMITER ;
+CALL SP_LISTAREVENTOS();
+
+
+/* Listar Eventos por Participante */
+DELIMITER $
+CREATE OR REPLACE PROCEDURE SP_LISTAREVENTOS_PAR()
+BEGIN 
+	SELECT e.id,e.`data`,e.hora,e.`local`,e.tipo_esporte AS Esporte,e.faixa_etaria
+	FROM evento e, participante p
+	WHERE p.id = e.id
+	
+END $
+DELIMITER ;
+CALL SP_LISTAREVENTOS_PAR();
+
+/* Identifica o Login se é Participante(Usuario) ou Colaborador */
+DELIMITER $
+CREATE OR REPLACE PROCEDURE SP_PAR-COL(INOUT email VARCHAR)
+BEGIN
+	DECLARE email VARCHAR(255);
+	SELECT p.nome, p.email 
+	   FROM participante p, colaborador c
+		WHERE p.email = 'carlosdegasperi@hotmail.com';
+/*	SET email = email; */
+		
+END $
+DELIMITER ;
+
+SET @email='carlosdegasperi@hotmail.com ';
+CALL SP_PAR-COL(@email);
+
+
+/* Trigger para Deletar Dados do Participante */
+/* Ao deletar o Participante essa Trigger deleta todas as Inscricoes na Tabela (inscricao_particante) */
+DELIMITER$
+CREATE OR REPLACE TRIGGER TRG_DELETAR_PAR
+BEFORE DELETE
+ON participante
+FOR EACH ROW
+BEGIN
+	DELETE FROM inscricao_participante 
+	WHERE fk_participante_id = id
+	
+END $
+DELIMITER ;
+
+/*--------------------------------------------------------------------------------------------------------------------------------*/
